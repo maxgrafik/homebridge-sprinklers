@@ -1,0 +1,246 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+html {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 100%;
+    line-height: 1.4;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overscroll-behavior: none;
+}
+
+body {
+    position: fixed;
+}
+
+
+/* --- card --- */
+
+.card {
+    position: relative;
+    display: block;
+    margin: 6px 0 0 0;
+    padding: 16px 16px 12px 16px;
+    background: var(--secondarySystemGroupedBackground);
+    border-radius: 9px;
+}
+.card:after {
+    display: table;
+    content: "";
+    clear: both;
+}
+.card button {
+    position: absolute;
+    display: block;
+    top: 50%;
+    right: 18px;
+    width: auto;
+    height: 34px;
+    min-height: 34px;
+    margin: -17px 0 0 0;
+    padding: 0 16px;
+    font-size: 1.0625rem;
+    font-weight: 400;
+    color: var(--accent-color);
+    border: 1px solid var(--quaternaryLabel);
+    border-radius: 17px;
+    box-shadow: none;
+    outline: none;
+    background-color: var(--secondarySystemGroupedBackground);
+}
+
+
+/* --- forecast --- */
+
+.forecast {
+    display: block;
+    position: relative;
+    min-height: 290px;
+    background: var(--accent-color) url("../img/wallpaper.jpg") 50% 50% no-repeat;
+    background-size: cover;
+}
+.forecast:after {
+    display: table;
+    content: "";
+    clear: both;
+}
+
+@media screen and (max-width: 767px) {
+    .forecast {
+        margin: -16px -16px 16px -16px;
+        padding: 16px 16px 20px 16px;
+        border-radius: none;
+    }
+}
+@media screen and (min-width: 768px) {
+    .forecast {
+        margin: 0 0 32px 0;
+        padding: 24px 24px 32px 24px;
+        border-radius: 9px;
+    }
+}
+
+figure {
+    position: relative;
+    display: block;
+    float: left;
+    text-align: center;
+    width: calc(100% / 6);
+}
+figure i.wi {
+    height: max(4.5vw, 4.5vh);
+    max-height: 56px;
+    margin: 12px 0 12px 0;
+    color: #fff;
+}
+figure span {
+    display: block;
+    font-size: 1rem;
+    color: #fff;
+}
+figure .tempMin {
+    color: #fff;
+    opacity: .6;
+}
+figure .tempMax {
+    color: #fff;
+}
+figure .rain {
+    padding-top: 6px;
+    color: #6ae8fa;
+}
+figure:first-of-type {
+    float: none;
+    width: 100%;
+}
+figure:first-of-type::after {
+    display: table;
+    content: "";
+    clear: both;
+}
+figure:first-of-type > span {
+    font-size: 1.0625rem;
+    font-weight: 400;
+}
+figure:first-of-type i.wi {
+    display: block;
+    float: left;
+    width: 45%;
+    height: max(10vw, 10vh);
+    max-height: 90px;
+    margin: 0;
+    padding: 5px 0 0 0;
+}
+figure:first-of-type i.wi::after {
+    content: attr(title);
+    display: block;
+    position: absolute;
+    top: 90px;
+    left: 45%;
+    width: 55%;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 1;
+    opacity: .8;
+}
+figure:first-of-type figcaption {
+    display: block;
+    width: 100%;
+    margin: 0 0 1rem 0;
+    padding: 0.5rem 0 2.5rem 45%;
+    border-bottom: 1px solid rgba(255,255,255,.4);
+}
+figure:first-of-type figcaption span {
+    display: inline;
+    padding: 0 0.5rem;
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+}
+figure:first-of-type figcaption span.rain {
+    display: none;
+}
+
+
+/* ---  login dialog --- */
+
+#login {
+    display: block;
+    position: absolute;
+    top: 25%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 268px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    border: none;
+    background: transparent;
+    outline: 0;
+    z-index: 1100;
+}
+#login .logo {
+    position: relative;
+    margin: 0 auto 15px auto;
+    width: 190px;
+}
+#login * {
+    color: #fff;
+}
+#login input {
+    margin: 13px 0 0 0;
+    padding: 9px 18px;
+    width: 100% !important;
+    min-height: 44px;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    border-radius: 22px;
+    border: none;
+    background: rgba(255,255,255,.4);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .25);
+    outline: none;
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    user-select: auto;
+}
+#login input::placeholder {
+    color: rgba(255,255,255,.5);
+}
+#login ::-webkit-credentials-auto-fill-button {
+    background-color: #fff;
+}
+
+
+/* --- miscellaneous stuff --- */
+
+a {
+    text-decoration: none;
+}
+
+.spinner {
+    width: 64px;
+    height: 64px;
+    margin: 95px auto;
+    background: transparent url("../img/spinner.svg") 50% 50% no-repeat;
+    background-size: 100%;
+}
+
+iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
+}

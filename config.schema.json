@@ -1,0 +1,133 @@
+{
+    "pluginAlias": "Sprinklers",
+    "pluginType": "platform",
+    "singular": true,
+    "headerDisplay": "Smart irrigation for Homebridge",
+    "schema": {
+        "type": "object",
+        "properties": {
+            "zones": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "zoneName": {
+                            "title": "Name",
+                            "type": "string",
+                            "maxLength": 16,
+                            "placeholder": "zone name",
+                            "required": true
+                        },
+                        "exposeSensor": {
+                            "title": "Expose Sensor",
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                }
+            },
+            "latitude": {
+                "title": "Latitude",
+                "type": "number",
+                "minimum": -90,
+                "maximum": 90,
+                "default": 0.0
+            },
+            "longitude": {
+                "title": "Longitude",
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "default": 0.0
+            },
+            "server": {
+                "title": "Enable Server",
+                "type": "boolean",
+                "default": true
+            },
+            "serverPort": {
+                "title": "Server port",
+                "type": "number",
+                "default": 9000
+            },
+            "serverPassword": {
+                "title": "Password",
+                "type": "string"
+            }
+        }
+    },
+
+    "layout": [
+        {
+            "key": "zones",
+            "title": "Zones",
+            "buttonText": "Add zone",
+            "orderable": false,
+            "items": [
+                {
+                    "type": "flex",
+                    "flex-flow": "row nowrap",
+                    "align-items": "baseline",
+                    "justify-content": "space-between",
+                    "items": [
+                        {
+                            "flex": "0 1 60%",
+                            "key" : "zones[].zoneName",
+                            "notitle": true
+                        },
+                        {
+                            "flex": "0 1 30%",
+                            "key": "zones[].exposeSensor",
+                            "inline": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Location",
+            "expandable": true,
+            "expanded": false,
+            "items": [
+                {
+                    "type": "flex",
+                    "flex-flow": "row nowrap",
+                    "items": ["latitude", "longitude"]
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "title": "Server",
+            "expandable": true,
+            "expanded": false,
+            "items": [
+                {
+                    "type": "flex",
+                    "flex-flow": "row nowrap",
+                    "align-items": "baseline",
+                    "justify-content": "space-between",
+                    "items": [
+                        {
+                            "flex": "0 1 63%",
+                            "key" : "server",
+                            "inline": true
+                        },
+                        {
+                            "flex": "0 1 7%",
+                            "type": "help",
+                            "helpvalue": "Port:"
+                        },
+                        {
+                            "flex": "0 1 20%",
+                            "key": "serverPort",
+                            "notitle": true
+                        }
+                    ]
+                },
+                "serverPassword"
+            ]
+        }
+    ]
+}

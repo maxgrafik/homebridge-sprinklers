@@ -1,0 +1,10 @@
+<nav>
+    <img class="logo" src="img/sprinklers.svg" alt="Sprinklers">
+    <ul>
+        <!-- ko foreach: { data: Menu, as: 'MenuItem' } -->
+        <li>
+            <a data-bind="attr: { href: '#!' + MenuItem.route }, css: { active: MenuItem.isSelected }, class: MenuItem.name, i18n: 'Menu'+MenuItem.name"></a>
+        </li>
+        <!-- /ko -->
+    </ul>
+</nav>

@@ -1,0 +1,15 @@
+{
+    "name": "Sprinklers",
+    "short_name": "Sprinklers",
+    "description": "Smart irrigation for Homebridge",
+    "start_url": ".",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color" : "#338000",
+    "icons": [{
+        "src": "apple-touch-icon.png",
+        "sizes": "180x180",
+        "type": "image/png",
+        "purpose": "maskable"
+    }]
+}

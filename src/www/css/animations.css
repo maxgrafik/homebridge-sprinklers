@@ -1,0 +1,77 @@
+/* ---  css animations --- */
+
+@keyframes fadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+.fadeIn {
+    animation: fadeIn .15s;
+}
+
+@keyframes fadeOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+.fadeOut {
+    animation: fadeOut .15s;
+}
+
+@keyframes slideInRight {
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+.slideInRight {
+    animation: slideInRight .5s ease;
+}
+
+@keyframes slideOutRight {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+.slideOutRight {
+    animation: slideOutRight .35s ease-out;
+}
+
+@keyframes slideInLeft {
+    0%   { opacity: 0.9; transform: translateX(-30%); }
+    100% { opacity: 1.0; transform: translateX(0); }
+}
+.slideInLeft {
+    animation: slideInLeft .35s ease-out;
+}
+
+@keyframes slideOutLeft {
+    0%   { opacity: 1.0; transform: translateX(0); }
+    100% { opacity: 0.9; transform: translateX(-30%); }
+}
+.slideOutLeft {
+    animation: slideOutLeft .5s ease;
+}
+
+@keyframes shake {
+    0%   { left: 0; }
+    20%  { left: -10px; }
+    40%  { left: 10px; }
+    60%  { left: -10px; }
+    80%  { left: 10px; }
+    100% { left: 0; }
+}
+.shake {
+    animation: shake .3s ease;
+}
+
+@keyframes slideUp {
+    0%   { opacity: 0; transform: translateY(100%); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+.slideUp {
+    animation: slideUp .3s ease;
+}
+
+@keyframes slideDown {
+    0%   { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(100%); }
+}
+.slideDown {
+    animation: slideDown .3s ease;
+}

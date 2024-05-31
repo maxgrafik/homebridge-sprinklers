@@ -1,0 +1,242 @@
+<section id="Settings" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'TitleZones'"></button>
+        <h2 data-bind="i18n: 'TitleZone'"></h2>
+    </header>
+    <div class="tabcontent">
+        <h1 data-bind="text: Zone.name"></h1>
+
+        <label class="inline" data-bind="i18n: 'LabelZoneEnabled'">
+            <input type="checkbox" class="switch" data-bind="checked: Zone.enabled">
+        </label>
+
+        <!-- ko if: Zone.enabled -->
+        <fieldset>
+            <legend data-bind="i18n: 'LabelZoneSchedule'"></legend>
+            <label data-bind="i18n: 'LabelAdaptive'">
+                <input type="checkbox" class="switch" data-bind="checked: Zone.schedule.adaptive">
+            </label>
+            <!-- ko if: Zone.schedule.adaptive -->
+            <a class="select" data-bind="navLink: 'Characteristics', i18n: 'TitleCharacteristics'"></a>
+            <a class="select" data-bind="navLink: 'Sprinklers', i18n: 'TitleSprinklers'"></a>
+            <!-- /ko -->
+            <!-- ko ifnot: Zone.schedule.adaptive -->
+            <a class="select" data-bind="navLink: 'Schedule', i18n: 'TitleSchedule'"></a>
+            <!-- /ko -->
+        </fieldset>
+        <fieldset>
+            <legend data-bind="i18n: 'LabelIrrigation'"></legend>
+            <a class="select" data-bind="navLink: 'Cycles', i18n: 'TitleCycles'">
+                <span data-bind="text: Zone.irrigation.cycles"></span>
+            </a>
+            <a class="select" data-bind="navLink: 'SunriseOffset', i18n: 'TitleSunriseOffset'">
+                <span data-bind="i18n: 'OptSunriseOffset', value: ZoneScheduleSunriseOffset"></span>
+            </a>
+        </fieldset>
+
+        <!-- ko if: Zone.configured -->
+        <fieldset>
+            <legend data-bind="i18n: 'LabelActivity'"></legend>
+            <label data-bind="i18n: 'LabelNextRun'">
+                <input type="text" data-bind="value: NextRun" readonly>
+            </label>
+            <!-- ko if: NextDuration -->
+            <label data-bind="i18n: 'LabelNextDuration'">
+                <input type="text" data-bind="value: NextDuration" readonly>
+            </label>
+            <!-- /ko -->
+        </fieldset>
+        <!-- /ko -->
+
+        <!-- /ko -->
+
+        <!-- ko ifnot: Zone.configured -->
+        <button class="default" data-bind="click: configureZone, i18n: 'LabelConfigureZone'"></button>
+        <!-- /ko -->
+    </div>
+</section>
+
+<section id="Characteristics" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+        <h2 data-bind="i18n: 'TitleCharacteristics'"></h2>
+    </header>
+    <div class="tabcontent">
+        <p data-bind="i18n: 'TextCharacteristics'"></p>
+        <label data-bind="i18n: 'LabelCropCoefficient'">
+            <slider params="min: 0.1, max: 1.4, step: 0.05, value: Zone.characteristics.Kc"></slider>
+            <span data-bind="format: Zone.characteristics.Kc, style: 'decimal'"></span>
+        </label>
+        <p data-bind="i18n: 'TextCropCoefficient'"></p>
+        <label class="inline" data-bind="i18n: 'LabelRootingDepth'">
+            <input type="number" inputmode="decimal" data-bind="validate: Zone.characteristics.Zr, style: 'decimal'">
+        </label>
+        <p data-bind="i18n: 'TextRootingDepth'"></p>
+        <fieldset>
+            <legend data-bind="i18n: 'LabelSoil'"></legend>
+            <a class="select" data-bind="navLink: 'SoilTexture', i18n: 'TitleSoilTexture'">
+                <span data-bind="i18n: SelectedSoilTexture()"></span>
+            </a>
+            <a class="select" data-bind="navLink: 'TAW', i18n: 'TitleTAW'">
+                <span data-bind="format: Zone.characteristics.TAW, style: 'mm/m'"></span>
+            </a>
+            <a class="select" data-bind="navLink: 'Dr', i18n: 'TitleDr'">
+                <span data-bind="format: ZoneCharacteristicsDr, style: 'mm'"></span>
+            </a>
+        </fieldset>
+        <label data-bind="i18n: 'LabelMAD'">
+            <slider params="min: 0, max: 1, step: 0.01, value: Zone.characteristics.MAD"></slider>
+            <span data-bind="format: Zone.characteristics.MAD, style: 'percentage'"></span>
+        </label>
+        <p data-bind="i18n: 'TextMAD'"></p>
+    </div>
+</section>
+
+<section id="SoilTexture" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+        <h2 data-bind="i18n: 'TitleSoilTexture'"></h2>
+    </header>
+    <div class="tabcontent">
+        <p data-bind="i18n: 'TextSoilTexture'"></p>
+        <fieldset>
+            <!-- ko foreach: SoilTextureOptions -->
+            <label>
+                <!-- ko text: $data.title --><!-- /ko -->
+                <input type="radio" name="soiltexture" data-bind="checkedValue: $data.value, checked: $parent.Zone.characteristics.TAW">
+                <span data-bind="format: $data.value, style: 'mm/m'"></span>
+            </label>
+            <!-- /ko -->
+        </fieldset>
+    </div>
+</section>
+
+<section id="TAW" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+        <h2 data-bind="i18n: 'TitleTAW'"></h2>
+    </header>
+    <div class="tabcontent">
+        <p data-bind="i18n: 'TextTAW'"></p>
+        <label class="inline" data-bind="i18n: 'LabelTAW'">
+            <input type="number" inputmode="numeric" data-bind="validate: Zone.characteristics.TAW, style: 'numeric'">
+        </label>
+    </div>
+</section>
+
+<section id="Dr" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+        <h2 data-bind="i18n: 'TitleDr'"></h2>
+    </header>
+    <div class="tabcontent">
+        <p data-bind="i18n: 'TextDr'"></p>
+        <label class="inline" data-bind="i18n: 'LabelDr'">
+            <input type="number" inputmode="decimal" data-bind="validate: ZoneCharacteristicsDr, style: 'decimal'">
+        </label>
+    </div>
+</section>
+
+<section id="Sprinklers" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+        <h2 data-bind="i18n: 'TitleSprinklers'"></h2>
+    </header>
+    <div class="tabcontent">
+        <label class="inline" data-bind="i18n: 'LabelIrrigationArea'">
+            <input type="number" inputmode="decimal" data-bind="validate: Zone.irrigation.area, style: 'decimal'">
+        </label>
+        <p data-bind="i18n: 'TextIrrigationArea'"></p>
+        <label class="inline" data-bind="i18n: 'LabelEmitterCount'">
+            <input type="number" inputmode="numeric" data-bind="validate: Zone.irrigation.emitterCount, style: 'numeric'">
+        </label>
+        <label class="inline" data-bind="i18n: 'LabelFlowRate'">
+            <input type="number" inputmode="decimal" data-bind="validate: Zone.irrigation.flowRate, style: 'decimal'">
+        </label>
+        <p data-bind="i18n: 'TextFlowRate'"></p>
+        <label data-bind="i18n: 'LabelEfficiency'">
+            <slider params="min: 0, max: 1, step: 0.01, value: Zone.irrigation.efficiency"></slider>
+            <span data-bind="format: Zone.irrigation.efficiency, style: 'percentage'"></span>
+        </label>
+        <p data-bind="i18n: 'TextEfficiency'"></p>
+    </div>
+</section>
+
+<section id="Schedule" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+        <h2 data-bind="i18n: 'TitleSchedule'"></h2>
+    </header>
+    <div class="tabcontent">
+        <label data-bind="i18n: 'LabelDefaultDuration'">
+            <select data-bind="options: RunTimeOptions,
+                               optionsText: 'title',
+                               optionsValue: 'value',
+                               value: ZoneScheduleDefaultDuration,
+                               valueAllowUnset: false">
+            </select>
+        </label>
+        <p data-bind="i18n: 'TextDefaultDuration'"></p>
+        <fieldset>
+            <legend data-bind="i18n: 'LabelWeekdays'"></legend>
+            <!-- ko foreach: WeekdayOptions -->
+            <label>
+                <!-- ko text: $data --><!-- /ko -->
+                <input type="checkbox" data-bind="checked: $parent.Weekdays($index)">
+            </label>
+            <!-- /ko -->
+        </fieldset>
+    </div>
+</section>
+
+<section id="Cycles" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+        <h2 data-bind="i18n: 'TitleCycles'"></h2>
+    </header>
+    <div class="tabcontent">
+        <p data-bind="i18n: 'TextCycles'"></p>
+        <label data-bind="i18n: 'LabelCycles'">
+            <slider params="min: 1, max: 5, step: 1, value: Zone.irrigation.cycles"></slider>
+            <span data-bind="text: Zone.irrigation.cycles"></span>
+        </label>
+        <fieldset>
+            <legend data-bind="i18n: 'LabelCyclesPause'"></legend>
+            <!-- ko foreach: CyclePauseOptions -->
+            <label>
+                <!-- ko text: $data.title --><!-- /ko -->
+                <input type="radio" name="soaktime" data-bind="checkedValue: $data.value, checked: $parent.ZoneIrrigationSoakTime">
+            </label>
+            <!-- /ko -->
+        </fieldset>
+        <!-- ko if: Zone.schedule.adaptive -->
+        <label data-bind="i18n: 'LabelMinimumDuration'">
+            <select data-bind="options: MinimumDurationOptions,
+                               optionsText: 'title',
+                               optionsValue: 'value',
+                               value: ZoneScheduleMinimumDuration,
+                               valueAllowUnset: false">
+            </select>
+        </label>
+        <p data-bind="i18n: 'TextMinimumDuration'"></p>
+        <!-- /ko -->
+    </div>
+</section>
+
+<section id="SunriseOffset" role="tabpanel" hidden>
+    <header>
+        <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+        <h2 data-bind="i18n: 'TitleSunriseOffset'"></h2>
+    </header>
+    <div class="tabcontent">
+        <p data-bind="i18n: 'TextSunriseOffset'"></p>
+        <fieldset>
+            <!-- ko foreach: SunriseOptions -->
+            <label>
+                <!-- ko text: $data.title --><!-- /ko -->
+                <input type="radio" name="sunriseoffset" data-bind="checkedValue: $data.value, checked: $parent.ZoneScheduleSunriseOffset">
+            </label>
+            <!-- /ko -->
+        </fieldset>
+    </div>
+</section>

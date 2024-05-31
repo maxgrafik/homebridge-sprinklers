@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "displayName": "Sprinklers",
+  "name": "homebridge-sprinklers",
+  "version": "0.1.0",
+  "description": "Smart irrigation for Homebridge",
+  "main": "src/index.js",
+  "author": "Hendrik Meinl",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/maxgrafik/homebridge-sprinklers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maxgrafik/homebridge-sprinklers/issues"
+  },
+  "engines": {
+    "node": "^18.17.0 || ^20.9.0",
+    "homebridge": "^1.6.0"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "irrigation"
+  ],
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

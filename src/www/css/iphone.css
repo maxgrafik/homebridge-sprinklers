@@ -1,0 +1,118 @@
+/* ---  basic layout --- */
+
+:root {
+    --navbar-height: 44px;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    height: calc(100% + env(safe-area-inset-top));
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: var(--navigationbarBackground) url("../img/wallpaper.jpg") 50% 50% no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+main {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+main > header {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    height: calc(50px + env(safe-area-inset-bottom));
+    background: var(--navigationbarBackground);
+    border-top: 0.5px solid var(--opaqueSeparator);
+    overflow: hidden;
+    z-index: 9000;
+}
+
+main > #view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    bottom: calc(50px + env(safe-area-inset-bottom));
+    width: 100%;
+    height: auto;
+    padding-top: env(safe-area-inset-top);
+    background: var(--navigationbarBackground);
+    overflow: hidden;
+}
+
+
+/* ---  navigation --- */
+
+nav {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+}
+nav .logo {
+    display: none;
+}
+nav > ul {
+    list-style: none;
+    position: relative;
+    height: 100%;
+    padding: 0 16px;
+}
+nav > ul > li {
+    position: relative;
+    display: block;
+    width: calc(100% / 3);
+    float: left;
+}
+nav > ul > li > a {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0;
+    font-size: 0.625rem;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    color: var(--systemGray);
+}
+nav > ul > li > a.active {
+    color: var(--accent-color);
+}
+nav > ul > li > a:before {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 25px;
+    margin: 6px auto 4px auto;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: var(--systemGray);
+}
+nav > ul > li > a.Dashboard:before {
+    -webkit-mask-image: url("../img/icon-calendar.svg");
+    -webkit-mask-size: 30px;
+}
+nav > ul > li > a.Zones:before {
+    -webkit-mask-image: url("../img/icon-zones.svg");
+    -webkit-mask-size: 30px;
+}
+nav > ul > li > a.Preferences:before {
+    -webkit-mask-image: url("../img/icon-prefs.svg");
+    -webkit-mask-size: 28px;
+}
+nav > ul > li > a.active:before {
+    background: var(--accent-color);
+}

@@ -1,0 +1,142 @@
+/* ---  basic layout --- */
+
+:root {
+    --navbar-height: 50px;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    height: calc(100% + env(safe-area-inset-top));
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background: var(--navigationbarBackground) url("../img/wallpaper.jpg") 50% 50% no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+main {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+main > header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 35%;
+    padding-top: env(safe-area-inset-top);
+    border-right: 0.5px solid var(--opaqueSeparator);
+}
+
+main > #view {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 65%;
+    height: auto;
+    padding-top: env(safe-area-inset-top);
+    background: var(--navigationbarBackground);
+    overflow: hidden;
+}
+
+
+/* ---  navigation --- */
+
+nav {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+nav .logo {
+    position: absolute;
+    top: calc((var(--navbar-height) / 2) - 15px);
+    left: calc(50% - 65px);
+    width: 130px;
+}
+nav > ul {
+    list-style: none;
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 32px 20px;
+    background: var(--systemGroupedBackground);
+    border-top: 0.5px solid var(--opaqueSeparator);
+}
+nav > ul > li {
+    position: relative;
+    display: block;
+}
+nav > ul > li > a {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin: 0;
+    padding: 0 15px;
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 44px;
+    background-color: var(--secondarySystemGroupedBackground);
+    color: var(--label);
+}
+nav > ul > li > a:before {
+    content: "";
+    display: block;
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin: 10px 15px 0 0;
+    overflow: hidden;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: var(--accent-color);
+}
+nav > ul > li > a.Dashboard:before {
+    -webkit-mask-image: url("../img/icon-calendar.svg");
+    -webkit-mask-size: 28px;
+}
+nav > ul > li > a.Zones:before {
+    -webkit-mask-image: url("../img/icon-zones.svg");
+    -webkit-mask-size: 28px;
+}
+nav > ul > li > a.Preferences:before {
+    -webkit-mask-image: url("../img/icon-prefs.svg");
+    -webkit-mask-size: 26px;
+}
+nav > ul > li > a:hover,
+nav > ul > li > a.active {
+    color: #fff;
+    background: var(--accent-color);
+}
+nav > ul > li > a:hover:before,
+nav > ul > li > a.active:before {
+    background: #fff;
+}
+nav > ul > li:first-child > a {
+    border-top-left-radius: 9px !important;
+    border-top-right-radius: 9px !important;
+}
+nav > ul > li:last-child > a {
+    border-bottom-left-radius: 9px !important;
+    border-bottom-right-radius: 9px !important;
+}
+nav > ul > li:not(:last-child) > a:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 55px;
+    right: 0;
+    height: 0.5px;
+    background: var(--separator);
+}

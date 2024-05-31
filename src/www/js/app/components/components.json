@@ -1,0 +1,20 @@
+{"components" : [
+    {
+        "name"   : "Dashboard",
+        "menu"   : true,
+        "src"    : "components/dashboard/dashboard",
+        "route"  : "/"
+    },
+    {
+        "name"   : "Zones",
+        "menu"   : true,
+        "src"    : "components/zones/zones",
+        "route"  : "/zones"
+    },
+    {
+        "name"   : "Preferences",
+        "menu"   : true,
+        "src"    : "components/prefs/prefs",
+        "route"  : "/prefs"
+    }
+]}

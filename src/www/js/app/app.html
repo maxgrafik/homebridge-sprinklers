@@ -1,0 +1,10 @@
+<header>
+    <!-- ko component: { name: 'Navigation', params: { view: currentView } } --><!-- /ko -->
+</header>
+
+<!-- ko if: currentView -->
+<section id="view" data-bind="component: { name: currentView, params: { zones: Zones, prefs: Prefs } }">
+</section>
+<!-- /ko -->
+
+<alert params="config: confirmStopDlg"></alert>

@@ -1,0 +1,144 @@
+{
+    "values": {
+        "MenuDashboard"            : "Dashboard",
+        "MenuZones"                : "Zones",
+        "MenuPreferences"          : "Preferences",
+
+        "TitleDashboard"           : "Dashboard",
+        "TitleZones"               : "Zones",
+        "TitlePreferences"         : "Preferences",
+
+        "TitleZone"                : "Zone",
+        "TitleCharacteristics"     : "Characteristics",
+        "TitleSprinklers"          : "Sprinklers",
+        "TitleSchedule"            : "Schedule",
+        "TitleCycles"              : "Cycles",
+        "TitleSunriseOffset"       : "Completion",
+        "TitleTAW"                 : "Total Available Water",
+        "TitleDr"                  : "Soil Water Deficit",
+        "TitleSoilTexture"         : "Soil Texture",
+        "TitleLanguage"            : "Language",
+        "TitleLicenses"            : "Licenses",
+
+        "TitleConfirmStop"         : "Stop irrigation of “%{name}”?",
+
+        "LabelForecast"            : "Forecast",
+        "LabelToday"               : "Today",
+        "LabelSchedule"            : "Schedule",
+        "LabelNoZonesConfigured"   : "No zones configured",
+
+        "LabelZoneEnabled"         : "Enable Zone",
+        "LabelZoneSchedule"        : "Scheduling",
+        "LabelAdaptive"            : "Adaptive",
+        "LabelIrrigation"          : "Irrigation",
+        "LabelActivity"            : "Activity",
+        "LabelNextRun"             : "Next Run",
+        "LabelNextDuration"        : "Next Duration",
+        "LabelConfigureZone"       : "Configure Zone",
+
+        "LabelCropCoefficient"     : "Crop coefficient",
+        "LabelRootingDepth"        : "Rooting Depth",
+        "LabelSoil"                : "Soil",
+        "LabelTAW"                 : "Total Available Water",
+        "LabelMAD"                 : "Management Allowable Depletion",
+        "LabelDr"                  : "Soil Water Deficit",
+
+        "LabelIrrigationArea"      : "Irrigation area",
+        "LabelEmitterCount"        : "Number of sprinklers",
+        "LabelFlowRate"            : "Flow rate",
+        "LabelEfficiency"          : "Efficiency",
+
+        "LabelDefaultDuration"     : "Duration",
+        "LabelWeekdays"            : "Weekdays",
+
+        "LabelCycles"              : "Number of cycles",
+        "LabelCyclesPause"         : "Pause between cycles",
+        "LabelMinimumDuration"     : "Minimum Duration",
+
+        "BtnCancel"                : "Cancel",
+        "BtnStop"                  : "Stop",
+        "BtnStopNow"               : "Stop now",
+        "BtnBack"                  : "Back",
+        "BtnRuntime"               : [
+                                        [null, null, "%n min"]
+                                     ],
+
+        "OptCoarseSand"            : "Coarse Sand",
+        "OptFineSand"              : "Fine Sand",
+        "OptLoamySand"             : "Loamy Sand",
+        "OptSandyLoam"             : "Sandy Loam",
+        "OptFineSandyLoam"         : "Fine Sandy Loam",
+        "OptSiltLoam"              : "Silt Loam",
+        "OptSiltyClayLoam"         : "Silty Clay Loam",
+        "OptSiltyClay"             : "Silty Clay",
+        "OptClay"                  : "Clay",
+        "OptCustom"                : "Custom",
+
+        "OptMinutes"               : [
+                                        [0, 0, "None"],
+                                        [1, 1, "%n minute"],
+                                        [2, null, "%n minutes"]
+                                     ],
+        "OptSunriseOffset"         : [
+                                        [-60, -60, "1 hour before sunrise"],
+                                        [0, 0, "At sunrise"],
+                                        [60, 60, "1 hour after sunrise"],
+                                        [120, 120, "2 hours after sunrise"],
+                                        [null, -1, "-%n minutes before sunrise"],
+                                        [1, null, "%n minutes after sunrise"]
+                                     ],
+        "OptWeatherCondition"      : [
+                                        [0, 0, "Clear"],
+                                        [1, 1, "Mainly clear"],
+                                        [2, 2, "Partly cloudy"],
+                                        [3, 3, "Overcast"],
+                                        [45, 45, "Fog"],
+                                        [48, 48, "Depositing rime fog"],
+                                        [51, 51, "Light drizzle"],
+                                        [53, 53, "Moderate drizzle"],
+                                        [55, 55, "Drizzle"],
+                                        [56, 56, "Light freezing drizzle"],
+                                        [57, 57, "Freezing drizzle"],
+                                        [61, 61, "Slight rain"],
+                                        [63, 63, "Moderate rain"],
+                                        [65, 65, "Heavy rain"],
+                                        [66, 66, "Light freezing rain"],
+                                        [67, 67, "Heavy freezing rain"],
+                                        [71, 71, "Slight snowfall"],
+                                        [73, 73, "Moderate snowfall"],
+                                        [75, 75, "Heavy snowfall"],
+                                        [77, 77, "Snow grains"],
+                                        [80, 80, "Slight rain showers"],
+                                        [81, 81, "Moderate rain showers"],
+                                        [82, 82, "Rain showers"],
+                                        [85, 85, "Slight snow showers"],
+                                        [86, 86, "Heavy snow showers"],
+                                        [95, 95, "Thunderstorm"],
+                                        [96, 96, "Thunderstorm with slight hail"],
+                                        [99, 99, "Thunderstorm with heavy hail"],
+                                        [null, null, "Unknown WMO code"]
+                                     ],
+        "TextNoScheduledRun"       : "No scheduled run",
+        "TextIsRunning"            : "Running…",
+        "TextCharacteristics"      : "You can adjust the characteristics of adaptive zones to get a better estimation of the water requirements for your plants.",
+        "TextCropCoefficient"      : "Based on crop type or species and their water needs.",
+        "TextRootingDepth"         : "Depth in meters down to which roots can take up the maximum amount of available water from the soil.",
+        "TextTAW"                  : "Maximum amount of water that soil can store to be extracted by the plants (mm/m).",
+        "TextMAD"                  : "Percentage of the Total Available Water allowed to be extracted from the active rooting zone before plants experience water stress.",
+        "TextDr"                   : "Soil water deficit describes the amount of water removed from the active rooting depth. You can change the current calculated value here to set the soil moisture conditions e.g. back to field capacity.",
+        "TextSoilTexture"          : "Select from common soil textures to set an average value for the Total Available Water capacity for this type of soil.",
+        "TextIrrigationArea"       : "Total irrigation area in m².",
+        "TextFlowRate"             : "Flow rate in liters per hour per sprinkler.",
+        "TextEfficiency"           : "Efficiency of various irrigation systems:\n• Hose Irrigation Systems: 70–80 %\n• Low-medium Pressure Sprinklers: 75 %\n• Microsprinklers/Microjets: 75–85 %\n• Drip Irrigation: 80–90 %",
+        "TextDefaultDuration"      : "The duration you select will determine how long sprinklers in this zone run for when adaptive watering is disabled or when manually turned on outside of a schedule.",
+        "TextCycles"               : "You can break the total run time into shorter cycles, so the landscape has time to absorb the water. This also helps to prevent run-off.",
+        "TextMinimumDuration"      : "Irrigation runs will only be scheduled, if the calculated cycle times are longer than the duration you select here.",
+        "TextSunriseOffset"        : "Select the time by which you want scheduled runs to be completed.",
+
+        "TextConfirmStop"          : "When stopping this zone, the next run will not be scheduled before tomorrow."
+    },
+    "formats": {
+        "numberDec" : ".",
+        "weekdays"  : ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    }
+}

@@ -1,0 +1,50 @@
+<section class="tabs">
+
+    <section role="tabpanel">
+        <header>
+            <h2 data-bind="i18n: 'TitleDashboard'"></h2>
+        </header>
+        <div class="tabcontent">
+            <div class="forecast">
+
+                <!-- ko if: isLoading -->
+                <div class="spinner"></div>
+                <!-- /ko -->
+
+                <!-- ko foreach: DailyForecast -->
+                <figure>
+                    <span data-bind="text: $data.day"></span>
+                    <i data-bind="css: $data.css, attr: { title: $data.cond }"></i>
+                    <figcaption>
+                        <span class="tempMax" data-bind="text: $data.tMax"></span>
+                        <span class="tempMin" data-bind="text: $data.tMin"></span>
+                        <!--<span class="rain" data-bind="text: $data.rain"></span>-->
+                    </figcaption>
+                </figure>
+                <!-- /ko -->
+            </div>
+
+            <label data-bind="i18n: 'LabelSchedule'"></label>
+
+            <!-- ko if: configuredZones().length === 0 -->
+            <h2 class="contentUnavailable" data-bind="i18n: 'LabelNoZonesConfigured'"></h2>
+            <!-- /ko -->
+
+            <!-- ko foreach: { data: configuredZones, as: 'zone', noChildContext: true } -->
+            <div class="card">
+                <h2 data-bind="text: zone.name"></h2>
+                <!-- ko ifnot: zone.isRunning -->
+                <small data-bind="text: NextRun(zone)"></small>
+                <!-- ko if: zone.schedule.duration -->
+                <button data-bind="text: NextDuration(zone)"></button>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: zone.isRunning -->
+                <small data-bind="i18n: 'TextIsRunning'"></small>
+                <button data-bind="i18n: 'BtnStop', click: $parent.confirmStop.bind(null, zone)"></button>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        </div>
+    </section>
+</section>

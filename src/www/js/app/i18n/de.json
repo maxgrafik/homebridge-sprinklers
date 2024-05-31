@@ -1,0 +1,144 @@
+{
+    "values": {
+        "MenuDashboard"            : "Übersicht",
+        "MenuZones"                : "Zonen",
+        "MenuPreferences"          : "Einstellungen",
+
+        "TitleDashboard"           : "Übersicht",
+        "TitleZones"               : "Zonen",
+        "TitlePreferences"         : "Einstellungen",
+
+        "TitleZone"                : "Zone",
+        "TitleCharacteristics"     : "Bodeneigenschaften",
+        "TitleSprinklers"          : "Beregnungsanlage",
+        "TitleSchedule"            : "Zeitplan",
+        "TitleCycles"              : "Durchläufe",
+        "TitleSunriseOffset"       : "Ende",
+        "TitleTAW"                 : "Nutzbare Feldkapazität",
+        "TitleDr"                  : "Bodenwasserdefizit",
+        "TitleSoilTexture"         : "Bodenart",
+        "TitleLanguage"            : "Sprache",
+        "TitleLicenses"            : "Lizenzen",
+
+        "TitleConfirmStop"         : "Beregnung von „%{name}“ stoppen?",
+
+        "LabelForecast"            : "Wettervorhersage",
+        "LabelToday"               : "Heute",
+        "LabelSchedule"            : "Zeitplan",
+        "LabelNoZonesConfigured"   : "Keine Zonen konfiguriert",
+
+        "LabelZoneEnabled"         : "Zone aktivieren",
+        "LabelZoneSchedule"        : "Planung",
+        "LabelAdaptive"            : "Wetterabhängig",
+        "LabelIrrigation"          : "Beregnung",
+        "LabelActivity"            : "Aktivität",
+        "LabelNextRun"             : "Beginn",
+        "LabelNextDuration"        : "Dauer",
+        "LabelConfigureZone"       : "Zone konfigurieren",
+
+        "LabelCropCoefficient"     : "Pflanzenkoeffizient",
+        "LabelRootingDepth"        : "Wurzeltiefe",
+        "LabelSoil"                : "Boden",
+        "LabelTAW"                 : "Nutzbare Feldkapazität",
+        "LabelMAD"                 : "Regulierte Defizitbewässerung",
+        "LabelDr"                  : "Bodenwasserdefizit",
+
+        "LabelIrrigationArea"      : "Fläche",
+        "LabelEmitterCount"        : "Anzahl Regner",
+        "LabelFlowRate"            : "Durchflussrate",
+        "LabelEfficiency"          : "Effizienz",
+
+        "LabelDefaultDuration"     : "Aktivzeit",
+        "LabelWeekdays"            : "Wochentage",
+
+        "LabelCycles"              : "Durchläufe",
+        "LabelCyclesPause"         : "Pause",
+        "LabelMinimumDuration"     : "Minimum Aktivzeit",
+
+        "BtnCancel"                : "Abbrechen",
+        "BtnStop"                  : "Stoppen",
+        "BtnStopNow"               : "Jetzt stoppen",
+        "BtnBack"                  : "Zurück",
+        "BtnRuntime"               : [
+                                        [null, null, "%n min"]
+                                     ],
+
+        "OptCoarseSand"            : "Grobsand",
+        "OptFineSand"              : "Feinsand",
+        "OptLoamySand"             : "Lehmiger Sand",
+        "OptSandyLoam"             : "Sandiger Lehm",
+        "OptFineSandyLoam"         : "Feiner sandiger Lehm",
+        "OptSiltLoam"              : "Schlufflehm",
+        "OptSiltyClayLoam"         : "Schluffiger Tonlehm",
+        "OptSiltyClay"             : "Schluffiger Ton",
+        "OptClay"                  : "Ton",
+        "OptCustom"                : "Individuell",
+
+        "OptMinutes"               : [
+                                        [0, 0, "Ohne"],
+                                        [1, 1, "%n Minute"],
+                                        [2, null, "%n Minuten"]
+                                     ],
+        "OptSunriseOffset"         : [
+                                        [-60, -60, "1 Std. vor Sonnenaufgang"],
+                                        [0, 0, "Bei Sonnenaufgang"],
+                                        [60, 60, "1 Std. nach Sonnenaufgang"],
+                                        [120, 120, "2 Std. nach Sonnenaufgang"],
+                                        [null, -1, "-%n Min. vor Sonnenaufgang"],
+                                        [1, null, "%n Min. nach Sonnenaufgang"]
+                                     ],
+        "OptWeatherCondition"      : [
+                                        [0, 0, "Clear"],
+                                        [1, 1, "Mainly clear"],
+                                        [2, 2, "Partly cloudy"],
+                                        [3, 3, "Overcast"],
+                                        [45, 45, "Fog"],
+                                        [48, 48, "Depositing rime fog"],
+                                        [51, 51, "Light drizzle"],
+                                        [53, 53, "Moderate drizzle"],
+                                        [55, 55, "Drizzle"],
+                                        [56, 56, "Light freezing drizzle"],
+                                        [57, 57, "Freezing drizzle"],
+                                        [61, 61, "Slight rain"],
+                                        [63, 63, "Moderate rain"],
+                                        [65, 65, "Heavy rain"],
+                                        [66, 66, "Light freezing rain"],
+                                        [67, 67, "Heavy freezing rain"],
+                                        [71, 71, "Slight snowfall"],
+                                        [73, 73, "Moderate snowfall"],
+                                        [75, 75, "Heavy snowfall"],
+                                        [77, 77, "Snow grains"],
+                                        [80, 80, "Slight rain showers"],
+                                        [81, 81, "Moderate rain showers"],
+                                        [82, 82, "Rain showers"],
+                                        [85, 85, "Slight snow showers"],
+                                        [86, 86, "Heavy snow showers"],
+                                        [95, 95, "Thunderstorm"],
+                                        [96, 96, "Thunderstorm with slight hail"],
+                                        [99, 99, "Thunderstorm with heavy hail"],
+                                        [null, null, "Unknown WMO code"]
+                                     ],
+        "TextNoScheduledRun"       : "Keine geplante Beregnung",
+        "TextIsRunning"            : "Läuft…",
+        "TextCharacteristics"      : "Die gewählten Pflanzen- und Bodeneigenschaften beeinflussen die Beregnungsdauer.",
+        "TextCropCoefficient"      : "Basierend auf Pflanzenart und Wachstumsphase.",
+        "TextRootingDepth"         : "Tiefe in Metern, bis zu der das Bodenwasser von den Pflanzenwurzeln voll ausgeschöpft werden kann.",
+        "TextTAW"                  : "Teil des Bodenwassers, der von den Pflanzen durch die Wurzeln aufgenommen werden kann (mm/m).",
+        "TextMAD"                  : "Zulässiges Defizit der nutzbaren Feldkapazität.",
+        "TextDr"                   : "Bodenwasserdefizit beschreibt die Wassermenge, die aus der aktiven Wurzelzone entfernt wurde. Der aktuell berechnete Wert kann hier geändert werden, um die Bodenfeuchtigkeit z. B. wieder auf Feldkapazität einzustellen.",
+        "TextSoilTexture"          : "Gängige Bodenarten und deren durchsschnittliche nutzbare Feldkapazität.",
+        "TextIrrigationArea"       : "Gesamtfläche in m².",
+        "TextFlowRate"             : "Durchflussrate in Litern pro Stunde pro Regner.",
+        "TextEfficiency"           : "Effizienz verschiedener Beregnungsanlagen:\n• Schlauchbewässerung: 70–80 %\n• Niederdruck-Regner: 75 %\n• Microsprinklers/Microjets: 75–85 %\n• Tröpfchenbewässerung: 80–90 %",
+        "TextDefaultDuration"      : "Die gewählte Dauer bestimmt, wie lange Regner in dieser Zone aktiviert werden.",
+        "TextCycles"               : "Die Beregnungsdauer kann in mehrere Durchläufe aufgeteilt werden. So hat der Boden Zeit, das Wasser aufzunehmen.",
+        "TextMinimumDuration"      : "Beregnungen werden nur dann geplant, wenn die berechnete Dauer pro Durchlauf länger als die hier eingestellte Zeit ist.",
+        "TextSunriseOffset"        : "Beregnungen werden so geplant, dass sie zum gewählten Zeitpunkt beendet sind.",
+
+        "TextConfirmStop"          : "Wenn diese Zone gestoppt wird, wird die nächste Beregnung nicht vor morgen geplant."
+    },
+    "formats": {
+        "numberDec" : ",",
+        "weekdays"  : ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"]
+    }
+}

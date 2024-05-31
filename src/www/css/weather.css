@@ -1,0 +1,44 @@
+.wi {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+[class*="wi-wmo-"]:before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    -webkit-mask-image: url("../img/weather/na.svg");
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: #fff;
+}
+.wi-wmo-0:before{-webkit-mask-image: url("../img/weather/sun.svg")}
+.wi-wmo-1:before{-webkit-mask-image: url("../img/weather/sun.svg")}
+.wi-wmo-2:before{-webkit-mask-image: url("../img/weather/sun-cloudy.svg")}
+.wi-wmo-3:before{-webkit-mask-image: url("../img/weather/clouds.svg")}
+.wi-wmo-45:before{-webkit-mask-image: url("../img/weather/fog.svg")}
+.wi-wmo-48:before{-webkit-mask-image: url("../img/weather/fog.svg")}
+.wi-wmo-51:before{-webkit-mask-image: url("../img/weather/drizzle.svg")}
+.wi-wmo-53:before{-webkit-mask-image: url("../img/weather/drizzle.svg")}
+.wi-wmo-55:before{-webkit-mask-image: url("../img/weather/drizzle.svg")}
+.wi-wmo-56:before{-webkit-mask-image: url("../img/weather/hail.svg")}
+.wi-wmo-57:before{-webkit-mask-image: url("../img/weather/hail.svg")}
+.wi-wmo-61:before{-webkit-mask-image: url("../img/weather/rain.svg")}
+.wi-wmo-63:before{-webkit-mask-image: url("../img/weather/rain-moderate.svg")}
+.wi-wmo-65:before{-webkit-mask-image: url("../img/weather/rain-heavy.svg")}
+.wi-wmo-66:before{-webkit-mask-image: url("../img/weather/hail.svg")}
+.wi-wmo-67:before{-webkit-mask-image: url("../img/weather/hail.svg")}
+.wi-wmo-71:before{-webkit-mask-image: url("../img/weather/snow-light.svg")}
+.wi-wmo-73:before{-webkit-mask-image: url("../img/weather/snow-moderate.svg")}
+.wi-wmo-75:before{-webkit-mask-image: url("../img/weather/snow.svg")}
+.wi-wmo-77:before{-webkit-mask-image: url("../img/weather/hail.svg")}
+.wi-wmo-80:before{-webkit-mask-image: url("../img/weather/showers.svg")}
+.wi-wmo-81:before{-webkit-mask-image: url("../img/weather/showers.svg")}
+.wi-wmo-82:before{-webkit-mask-image: url("../img/weather/rain.svg")}
+.wi-wmo-85:before{-webkit-mask-image: url("../img/weather/snow-light.svg")}
+.wi-wmo-86:before{-webkit-mask-image: url("../img/weather/snow.svg")}
+.wi-wmo-95:before{-webkit-mask-image: url("../img/weather/thunderstorm.svg")}
+.wi-wmo-96:before{-webkit-mask-image: url("../img/weather/thunderstorm-hail.svg")}
+.wi-wmo-99:before{-webkit-mask-image: url("../img/weather/thunderstorm-hail.svg")}

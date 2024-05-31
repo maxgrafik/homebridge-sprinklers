@@ -1,0 +1,649 @@
+/* ---  colors --- */
+
+:root {
+    --accent-color: #338000;
+
+    --ios-red: rgb(255, 59, 48);
+    --ios-orange: rgb(255, 149, 0);
+    --ios-yellow: rgb(255, 204, 0);
+    --ios-green: rgb(52, 199, 89);
+    --ios-teal: rgb(48, 176, 199);
+    --ios-blue: rgb(0, 122, 255);
+    --ios-purple: rgb(175, 82, 222);
+    --ios-pink: rgb(255, 45, 85);
+
+    --systemBackground: #FFFFFF;
+    --secondarySystemBackground: #F2F2F7;
+    --tertiarySystemBackground: #FFFFFF;
+    --systemGroupedBackground: #F2F2F7;
+    --secondarySystemGroupedBackground: #FFFFFF;
+
+    --label: #000000;
+    --secondaryLabel: #3C3C4399;
+    --tertiaryLabel: #3C3C434D;
+    --quaternaryLabel: #3C3C432E;
+    --placeholderText: #3C3C434D;
+
+    --separator: #3C3C434A;
+    --opaqueSeparator: #C6C6C8;
+
+    --systemFill: #78788033;
+    --secondarySystemFill: #78788028;
+    --tertiarySystemFill: #7676801E;
+
+    --systemGray: #8E8E93;
+
+    --navigationbarBackground: #fafafc;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --accent-color: #55A000;
+
+        --ios-red: rgb(255, 69, 58);
+        --ios-orange: rgb(255, 159, 10);
+        --ios-yellow: rgb(255, 214, 10);
+        --ios-green: rgb(48, 209, 88);
+        --ios-teal: rgb(64, 200, 224);
+        --ios-blue: rgb(10, 132, 255);
+        --ios-purple: rgb(191, 90, 242);
+        --ios-pink: rgb(255, 55, 95);
+
+        --systemBackground: #000000;
+        --secondarySystemBackground: #1C1C1E;
+        --tertiarySystemBackground: #2C2C2E;
+        --systemGroupedBackground: #000000;
+        --secondarySystemGroupedBackground: #1C1C1E;
+
+        --label: #FFFFFF;
+        --secondaryLabel: #EBEBF599;
+        --tertiaryLabel: #EBEBF54D;
+        --quaternaryLabel: #EBEBF52E;
+        --placeholderText: #EBEBF54D;
+
+        --separator: #54545899;
+        --opaqueSeparator: #38383A;
+
+        --systemFill: #7878805B;
+        --secondarySystemFill: #78788051;
+        --tertiarySystemFill: #7676803D;
+
+        --systemGray: #8E8E93;
+
+        --navigationbarBackground: #1e1e1f;
+    }
+}
+
+:root {
+    --navbar-height: 44px;
+}
+
+
+/* ---  views --- */
+
+section.tabs {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+section[role="tabpanel"] {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--systemGroupedBackground);
+}
+
+.tabcontent {
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    padding: 16px;
+    overflow-y: scroll;
+}
+
+@media screen and (min-width: 768px) and (max-width: 834px) {
+    .tabcontent {
+        padding: 32px 20px;
+        padding-bottom: calc(32px + env(safe-area-inset-bottom));
+    }
+}
+@media screen and (min-width: 835px) {
+    .tabcontent {
+        padding: 32px 50px;
+        padding-bottom: calc(32px + env(safe-area-inset-bottom));
+    }
+}
+
+
+/* ---  page headers --- */
+
+section[role="tabpanel"] > header {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: var(--navbar-height);
+    padding: 0 8px;
+    overflow: hidden;
+    background: var(--navigationbarBackground);
+    border-bottom: 0.5px solid var(--opaqueSeparator);
+}
+section[role="tabpanel"] > header h2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    line-height: var(--navbar-height);
+    text-align: center;
+    color: var(--label);
+}
+section[role="tabpanel"] > header button,
+section[role="tabpanel"] > header a {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: var(--navbar-height);
+    margin: 0;
+    padding: 0 22px;
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: var(--navbar-height);
+    text-decoration: none;
+    color: var(--accent-color);
+    background-color: transparent;
+    z-index: 1;
+}
+section[role="tabpanel"] > header button:before,
+section[role="tabpanel"] > header a:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 34px;
+    height: 34px;
+    margin-top: -17px;
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: var(--accent-color);
+    vertical-align: top;
+}
+section[role="tabpanel"] > header button.left,
+section[role="tabpanel"] > header a.left {
+    float: left;
+}
+section[role="tabpanel"] > header button.right,
+section[role="tabpanel"] > header a.right {
+    float: right;
+}
+section[role="tabpanel"] > header button.left:before,
+section[role="tabpanel"] > header a.left:before {
+    left: -10px;
+    -webkit-mask-image: url("../img/icon-chevron-left.svg");
+}
+section[role="tabpanel"] > header button.right:before,
+section[role="tabpanel"] > header a.right:before {
+    right: -10px;
+    -webkit-mask-image: url("../img/icon-chevron-right.svg");
+}
+
+
+/* ---  typography --- */
+
+h1 {
+    position: relative;
+    display: block;
+    height: 52px;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 2.125rem;
+    color: var(--label);
+}
+
+h2 {
+    font-size: 1.375rem;
+    font-weight: 500;
+    letter-spacing: 0.02rem;
+    line-height: 1;
+    color: var(--label);
+}
+
+h2.contentUnavailable {
+    font-weight: 400;
+    text-align: center;
+    color: var(--tertiaryLabel);
+}
+h2.contentUnavailable:before {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 48px auto 16px auto;
+    overflow: hidden;
+    -webkit-mask-image: url("../img/icon-zones.svg");
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: var(--tertiaryLabel);
+}
+
+p {
+    margin: 8px 18px 26px 18px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--secondaryLabel);
+    white-space: pre-wrap;
+}
+
+small {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--secondaryLabel);
+}
+
+
+
+/* ---  inputs  --- */
+
+input, select, button {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+}
+
+input {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    user-select: auto;
+}
+
+
+fieldset {
+    border: none;
+}
+
+legend, label, input, select, .select, button {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+legend, label {
+    position: relative;
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-indent: 18px;
+    color: var(--secondaryLabel);
+}
+label > * {
+    text-indent: 0;
+}
+label > input[type="text"],
+label > input[type="number"],
+label > select,
+.select,
+button {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 18px;
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 28px;
+    text-transform: none;
+    text-align: left;
+    background-color: var(--secondarySystemGroupedBackground);
+    border-radius: 9px;
+    box-shadow: none;
+    outline: none;
+    color: var(--label);
+}
+
+label.inline,
+fieldset > label {
+    height: 44px;
+    padding: 8px 18px;
+    font-size: 1.0625rem;
+    text-transform: none;
+    text-indent: 0;
+    line-height: 28px;
+    background-color: var(--secondarySystemGroupedBackground);
+    border-radius: 9px;
+    color: var(--label);
+}
+label.inline > input[type="text"],
+label.inline > input[type="number"],
+fieldset > label > input[type="text"],
+fieldset > label > input[type="number"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 44px;
+    padding: 0 18px;
+    line-height: 44px;
+    text-align: right;
+    background: transparent;
+    border-radius: 0;
+}
+
+
+/* ---  select  --- */
+
+select {
+    background-color: var(--secondarySystemGroupedBackground);
+    background-image: url("../img/icon-chevron-up-down.svg");
+    background-position: right 5px top 6px;
+    background-repeat: no-repeat;
+    background-size: 32px;
+}
+
+.select:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 9px;
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 0;
+    -webkit-mask-image: url("../img/icon-chevron-right.svg");
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: var(--tertiaryLabel);
+}
+.select span {
+    display: inline-block;
+    float: right;
+    padding-right: 18px;
+    color: var(--secondaryLabel);
+}
+
+
+/* ---  slider  --- */
+
+input[type="range"] {
+    --pos: 0%;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 44px;
+    padding: 8px 76px 8px 18px;
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 28px;
+    text-transform: none;
+    text-align: left;
+    background-color: var(--secondarySystemGroupedBackground);
+    border-radius: 9px;
+    box-shadow: none;
+    outline: none;
+    color: var(--label);
+    overflow: hidden;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    border: none;
+    background: linear-gradient(90deg, var(--ios-green) var(--pos) , var(--systemFill) var(--pos));
+    box-shadow: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    appearance: none;
+    top: -12px;
+    width: 27px;
+    height: 27px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+    cursor: pointer;
+    z-index: 1;
+}
+slider {
+    position: relative;
+    display: block;
+}
+slider + span {
+    position: absolute;
+    bottom: 0;
+    right: 18px;
+    padding: 8px 0;
+    font-size: 1.0625rem;
+    text-align: right;
+    line-height: 28px;
+    color: var(--label);
+}
+
+
+/* ---  radio & checkboxes  --- */
+
+input[type="radio"],
+input[type="checkbox"] {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    margin: 0 !important;
+    -webkit-mask-image: url("../img/icon-checkmark.svg");
+    -webkit-mask-size: 22px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: right 17px top 50%;
+    background: none;
+}
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+    /* background: var(--ios-blue); */
+    background: var(--ios-green);
+}
+input[type="radio"] + span,
+input[type="checkbox"] + span {
+    display: inline-block;
+    float: right;
+    padding-right: 32px;
+    color: var(--secondaryLabel);
+}
+
+
+/* ---  switch  --- */
+
+input.switch,
+input.switch:checked {
+    position: relative;
+    display: block;
+    float: right;
+    top: -2px;
+    width: 51px;
+    height: 31px;
+    margin: 0 !important;
+    -webkit-mask-image: none;
+    border-radius: 16px !important;
+    background: var(--secondarySystemFill);
+    box-shadow: none;
+    overflow: hidden;
+}
+input.switch:checked {
+    background: var(--ios-green);
+}
+input.switch:before,
+input.switch:checked:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 2px;
+    left: 2px;
+    height: 27px;
+    width: 27px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+    transition: .1s ease-in-out;
+}
+input.switch:checked:before {
+    left: 22px;
+}
+
+
+/* ---  miscellaneous  --- */
+
+::placeholder {
+    color: var(--placeholderText);
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    display: none;
+}
+
+input[type="text"][readonly],
+input[type="number"][readonly] {
+    color: var(--secondaryLabel);
+}
+
+
+/* ---  spacing  --- */
+
+label > :first-child,
+fieldset > legend + * {
+    margin-top: 6px;
+}
+label.inline > :first-child,
+fieldset > label > :first-child {
+    margin-top: 0;
+}
+
+label + fieldset,
+fieldset + label,
+fieldset + fieldset,
+:not(fieldset) > label + label {
+    margin-top: 26px;
+}
+
+
+/* ---  grouping  --- */
+
+fieldset label,
+fieldset .select {
+    border-radius: 0;
+}
+fieldset label::after,
+fieldset .select::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 18px;
+    right: 0;
+    height: 0.5px;
+    background: var(--separator);
+}
+fieldset > legend + *,
+fieldset > :first-child {
+    border-top-left-radius: 9px !important;
+    border-top-right-radius: 9px !important;
+}
+fieldset > :last-child {
+    border-bottom-left-radius: 9px !important;
+    border-bottom-right-radius: 9px !important;
+}
+fieldset > :last-child::after {
+    display: none;
+}
+
+
+/* ---  buttons  --- */
+
+button.default,
+button.cancel {
+    margin-top: 26px;
+    color: var(--ios-blue);
+}
+
+button.destructive {
+    margin-top: 26px;
+    color: var(--ios-red);
+}
+
+
+/* ---  alert --- */
+
+dialog[role="alert"] {
+    display: block;
+    position: fixed;
+    top: 33%;
+    left: 0;
+    right: 0;
+    width: 270px;
+    margin: 0 auto;
+    border: none;
+    background: transparent;
+    outline: 0;
+    z-index: 9999;
+}
+dialog[role="alert"] .content {
+    text-align: center;
+    background: var(--secondarySystemBackground);
+    background-clip: padding-box;
+    border-radius: 14px;
+}
+dialog[role="alert"] h3 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--label);
+    margin: 0 0 -2px 0;
+    padding: 20px 14px 0 14px;
+}
+dialog[role="alert"] p {
+    margin: 0;
+    padding: 14px;
+    white-space: pre-wrap;
+    color: var(--secondaryLabel);
+}
+dialog[role="alert"] button {
+    width: 50%;
+    height: 44px;
+    padding: 0 16px;
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 44px;
+    text-align: center;
+    border-radius: 0;
+    background: transparent;
+}
+dialog[role="alert"] .content button {
+    margin: 0 0 0 50%;
+    border-top: 0.5px solid var(--opaqueSeparator);
+}
+dialog[role="alert"] > button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-top: 0.5px solid var(--opaqueSeparator);
+    border-right: 0.5px solid var(--opaqueSeparator);
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,.36);
+    z-index: 9990;
+}

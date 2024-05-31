@@ -1,0 +1,44 @@
+<section class="tabs" data-bind="navStack: NavigationStack">
+
+    <section role="tabpanel">
+        <header>
+            <h2 data-bind="i18n: 'TitlePreferences'"></h2>
+        </header>
+        <div class="tabcontent">
+            <label>
+                <a class="select" data-bind="navLink: 'Language', i18n: 'TitleLanguage'"></a>
+            </label>
+            <label>
+                <a class="select" data-bind="navLink: 'Licenses', i18n: 'TitleLicenses'"></a>
+            </label>
+        </div>
+    </section>
+
+    <section id="Language" role="tabpanel" hidden>
+        <header>
+            <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+            <h2 data-bind="i18n: 'TitleLanguage'"></h2>
+        </header>
+        <div class="tabcontent">
+            <fieldset>
+                <!-- ko foreach: Languages -->
+                <label class="radio">
+                    <!-- ko text: name --><!-- /ko -->
+                    <input type="radio" name="language" data-bind="checkedValue: code, checked: $parent.Prefs.language">
+                </label>
+                <!-- /ko -->
+            </fieldset>
+        </div>
+    </section>
+
+    <section id="Licenses" role="tabpanel" hidden>
+        <header>
+            <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
+            <h2 data-bind="i18n: 'TitleLicenses'"></h2>
+        </header>
+        <div class="tabcontent">
+            <iframe src="licenses.html"></iframe>
+        </div>
+    </section>
+
+</section>
