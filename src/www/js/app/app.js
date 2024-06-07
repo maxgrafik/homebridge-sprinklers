@@ -82,17 +82,41 @@ define(["knockout", "knockout-mapping", "ajax", "i18n"], function(ko, koMapping,
         self.updateTimer = null;
         self.deferSaving = null;
 
-        self.confirmStopDlg = ko.observable(null);
-        self.confirmStop = function(zone) {
-            self.confirmStopDlg({
-                title: i18n("TitleConfirmStop", {name: zone.name()}),
-                message: i18n("TextConfirmStop"),
-                buttons: [{
-                    text: i18n("BtnStopNow"),
+
+        /* ----- ALERTS ----- */
+
+        self.AlertTitle = ko.observable("");
+        self.AlertMessage = ko.observable("");
+        self.AlertActions = ko.observableArray([]);
+        self.AlertIsPresented = ko.observable(false).extend({ notify: "always" });
+
+        self.scheduleOptions = function(zone) {
+            self.AlertTitle("");
+            self.AlertMessage(i18n("AlertScheduleOptionsMsg", { name: zone.name() }));
+            self.AlertActions([
+                {
+                    label: i18n("BtnRunNow"),
+                    role: "default",
+                    action: self.overrideZoneSchedule.bind(self, zone, "RUN")
+                },
+                {
+                    label: i18n("BtnSkipRun"),
                     role: "destructive",
-                    action: self.cancelZone.bind(self, zone)
-                }]
-            });
+                    action: self.overrideZoneSchedule.bind(self, zone, "SKIP")
+                }
+            ]);
+            self.AlertIsPresented(true);
+        };
+
+        self.confirmStop = function(zone) {
+            self.AlertTitle(i18n("AlertConfirmStop"));
+            self.AlertMessage(i18n("AlertConfirmStopMsg", { name: zone.name() }));
+            self.AlertActions([{
+                label: i18n("BtnStopNow"),
+                role: "destructive",
+                action: self.overrideZoneSchedule.bind(self, zone, "CANCEL")
+            }]);
+            self.AlertIsPresented(true);
         };
 
 
@@ -173,16 +197,15 @@ define(["knockout", "knockout-mapping", "ajax", "i18n"], function(ko, koMapping,
         }
     };
 
-    Sprinklers.prototype.cancelZone = function(zone) {
+    Sprinklers.prototype.overrideZoneSchedule = function(zone, action) {
         const self = this;
-        if (zone.isRunning()) {
-            ajax.post("?q=cancel&zoneId=" + zone.id(), null, function() {
-                self.updateZones();
-            }, function(error) {
-                self.updateZones();
-                console.log(error);
-            });
-        }
+        const data = JSON.stringify({ zoneId: zone.id(), schedule: action });
+        ajax.post("?q=override", data, function() {
+            self.updateZones();
+        }, function(error) {
+            self.updateZones();
+            console.log(error);
+        });
     };
 
     Sprinklers.prototype.loadPrefs = function() {

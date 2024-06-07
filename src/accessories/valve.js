@@ -125,12 +125,9 @@ class Valve {
 
         this.irrigationSystem.start(this.zone.id, this.isOverride);
 
-        const timeStr = Math.round(this.duration / 60) + " min";
-
         if (this.isOverride) {
-            this.log.debug("[%s] Starting manual watering (%s)", this.zone.name, timeStr);
-        } else {
-            this.log.debug("[%s] Starting scheduled run (%s)", this.zone.name, timeStr);
+            const timeStr = Math.round(this.duration / 60) + " min";
+            this.log.info("[%s] Starting manual watering (%s)", this.zone.name, timeStr);
         }
     }
 
@@ -162,7 +159,9 @@ class Valve {
             }
         }
 
-        this.log.debug("[%s] Done", this.zone.name);
+        if (this.isOverride) {
+            this.log.info("[%s] Manual watering stopped", this.zone.name);
+        }
     }
 }
 

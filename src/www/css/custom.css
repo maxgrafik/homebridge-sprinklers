@@ -1,30 +1,3 @@
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    cursor: default;
-}
-
-html {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 100%;
-    line-height: 1.4;
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-    overscroll-behavior: none;
-}
-
-body {
-    position: fixed;
-}
-
-
 /* --- card --- */
 
 .card {
@@ -226,10 +199,6 @@ figure:first-of-type figcaption span.rain {
 
 
 /* --- miscellaneous stuff --- */
-
-a {
-    text-decoration: none;
-}
 
 .spinner {
     width: 64px;

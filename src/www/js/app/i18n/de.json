@@ -20,8 +20,6 @@
         "TitleLanguage"            : "Sprache",
         "TitleLicenses"            : "Lizenzen",
 
-        "TitleConfirmStop"         : "Beregnung von „%{name}“ stoppen?",
-
         "LabelForecast"            : "Wettervorhersage",
         "LabelToday"               : "Heute",
         "LabelSchedule"            : "Zeitplan",
@@ -57,7 +55,9 @@
 
         "BtnCancel"                : "Abbrechen",
         "BtnStop"                  : "Stoppen",
-        "BtnStopNow"               : "Jetzt stoppen",
+        "BtnStopNow"               : "Stoppen",
+        "BtnSkipRun"               : "Überspringen",
+        "BtnRunNow"                : "Jetzt starten",
         "BtnBack"                  : "Zurück",
         "BtnRuntime"               : [
                                         [null, null, "%n min"]
@@ -125,17 +125,19 @@
         "TextRootingDepth"         : "Tiefe in Metern, bis zu der das Bodenwasser von den Pflanzenwurzeln voll ausgeschöpft werden kann.",
         "TextTAW"                  : "Teil des Bodenwassers, der von den Pflanzen durch die Wurzeln aufgenommen werden kann (mm/m).",
         "TextMAD"                  : "Zulässiges Defizit der nutzbaren Feldkapazität.",
-        "TextDr"                   : "Bodenwasserdefizit beschreibt die Wassermenge, die aus der aktiven Wurzelzone entfernt wurde. Der aktuell berechnete Wert kann hier geändert werden, um die Bodenfeuchtigkeit z. B. wieder auf Feldkapazität einzustellen.",
+        "TextDr"                   : "Bodenwasserdefizit beschreibt die Menge an Wasser, die der aktiven Wurzelzone entnommen wurde. Der aktuell berechnete Wert kann geändert werden, um die Bodenfeuchtigkeit z. B. wieder auf Feldkapazität einzustellen.",
         "TextSoilTexture"          : "Gängige Bodenarten und deren durchsschnittliche nutzbare Feldkapazität.",
         "TextIrrigationArea"       : "Gesamtfläche in m².",
         "TextFlowRate"             : "Durchflussrate in Litern pro Stunde pro Regner.",
         "TextEfficiency"           : "Effizienz verschiedener Beregnungsanlagen:\n• Schlauchbewässerung: 70–80 %\n• Niederdruck-Regner: 75 %\n• Microsprinklers/Microjets: 75–85 %\n• Tröpfchenbewässerung: 80–90 %",
-        "TextDefaultDuration"      : "Die gewählte Dauer bestimmt, wie lange Regner in dieser Zone aktiviert werden.",
+        "TextDefaultDuration"      : "Die gewählte Dauer bestimmt, wie lange Regner in dieser Zone aktiviert werden, wenn keine wetterabhängige Planung erfolgt, oder wenn sie manuell (d. h. außerplanmäßig) aktiviert werden.",
         "TextCycles"               : "Die Beregnungsdauer kann in mehrere Durchläufe aufgeteilt werden. So hat der Boden Zeit, das Wasser aufzunehmen.",
-        "TextMinimumDuration"      : "Beregnungen werden nur dann geplant, wenn die berechnete Dauer pro Durchlauf länger als die hier eingestellte Zeit ist.",
+        "TextMinimumDuration"      : "Beregnungen werden nur dann geplant, wenn die berechnete Dauer pro Durchlauf länger als die hier gewählte Zeit ist.",
         "TextSunriseOffset"        : "Beregnungen werden so geplant, dass sie zum gewählten Zeitpunkt beendet sind.",
 
-        "TextConfirmStop"          : "Wenn diese Zone gestoppt wird, wird die nächste Beregnung nicht vor morgen geplant."
+        "AlertConfirmStop"         : "Beregnung stoppen?",
+        "AlertConfirmStopMsg"      : "Die nächste Beregnung der Zone „%{name}“ wird nicht vor morgen geplant.",
+        "AlertScheduleOptionsMsg"  : "Geplante Beregnung für Zone „%{name}“ ändern?"
     },
     "formats": {
         "numberDec" : ",",

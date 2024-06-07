@@ -1,10 +1,10 @@
-<section class="tabs" data-bind="navStack: NavigationStack">
+<section role="tablist">
 
     <section role="tabpanel">
         <header>
             <h2 data-bind="i18n: 'TitlePreferences'"></h2>
         </header>
-        <div class="tabcontent">
+        <div>
             <label>
                 <a class="select" data-bind="navLink: 'Language', i18n: 'TitleLanguage'"></a>
             </label>
@@ -19,7 +19,7 @@
             <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
             <h2 data-bind="i18n: 'TitleLanguage'"></h2>
         </header>
-        <div class="tabcontent">
+        <div>
             <fieldset>
                 <!-- ko foreach: Languages -->
                 <label class="radio">
@@ -36,7 +36,7 @@
             <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
             <h2 data-bind="i18n: 'TitleLicenses'"></h2>
         </header>
-        <div class="tabcontent">
+        <div>
             <iframe src="licenses.html"></iframe>
         </div>
     </section>

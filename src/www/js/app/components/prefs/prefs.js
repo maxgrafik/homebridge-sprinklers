@@ -12,8 +12,6 @@ define(["knockout", "knockout-mapping", "text!app/i18n/lang.json"], function(ko,
 
         const self = this;
 
-        self.NavigationStack = ko.observableArray([]);
-
 
         /* ----- VIEW MODEL ----- */
 

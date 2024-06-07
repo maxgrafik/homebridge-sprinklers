@@ -3,8 +3,8 @@
         <button class="left" data-bind="navLink: null, i18n: 'TitleZones'"></button>
         <h2 data-bind="i18n: 'TitleZone'"></h2>
     </header>
-    <div class="tabcontent">
-        <h1 data-bind="text: Zone.name"></h1>
+    <div>
+        <h2 data-bind="text: Zone.name"></h2>
 
         <label class="inline" data-bind="i18n: 'LabelZoneEnabled'">
             <input type="checkbox" class="switch" data-bind="checked: Zone.enabled">
@@ -61,10 +61,10 @@
         <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
         <h2 data-bind="i18n: 'TitleCharacteristics'"></h2>
     </header>
-    <div class="tabcontent">
+    <div>
         <p data-bind="i18n: 'TextCharacteristics'"></p>
         <label data-bind="i18n: 'LabelCropCoefficient'">
-            <slider params="min: 0.1, max: 1.4, step: 0.05, value: Zone.characteristics.Kc"></slider>
+            <slider params="min: 0.1, max: 2.0, step: 0.05, value: Zone.characteristics.Kc"></slider>
             <span data-bind="format: Zone.characteristics.Kc, style: 'decimal'"></span>
         </label>
         <p data-bind="i18n: 'TextCropCoefficient'"></p>
@@ -97,7 +97,7 @@
         <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
         <h2 data-bind="i18n: 'TitleSoilTexture'"></h2>
     </header>
-    <div class="tabcontent">
+    <div>
         <p data-bind="i18n: 'TextSoilTexture'"></p>
         <fieldset>
             <!-- ko foreach: SoilTextureOptions -->
@@ -116,7 +116,7 @@
         <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
         <h2 data-bind="i18n: 'TitleTAW'"></h2>
     </header>
-    <div class="tabcontent">
+    <div>
         <p data-bind="i18n: 'TextTAW'"></p>
         <label class="inline" data-bind="i18n: 'LabelTAW'">
             <input type="number" inputmode="numeric" data-bind="validate: Zone.characteristics.TAW, style: 'numeric'">
@@ -129,7 +129,7 @@
         <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
         <h2 data-bind="i18n: 'TitleDr'"></h2>
     </header>
-    <div class="tabcontent">
+    <div>
         <p data-bind="i18n: 'TextDr'"></p>
         <label class="inline" data-bind="i18n: 'LabelDr'">
             <input type="number" inputmode="decimal" data-bind="validate: ZoneCharacteristicsDr, style: 'decimal'">
@@ -142,7 +142,7 @@
         <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
         <h2 data-bind="i18n: 'TitleSprinklers'"></h2>
     </header>
-    <div class="tabcontent">
+    <div>
         <label class="inline" data-bind="i18n: 'LabelIrrigationArea'">
             <input type="number" inputmode="decimal" data-bind="validate: Zone.irrigation.area, style: 'decimal'">
         </label>
@@ -167,7 +167,7 @@
         <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
         <h2 data-bind="i18n: 'TitleSchedule'"></h2>
     </header>
-    <div class="tabcontent">
+    <div>
         <label data-bind="i18n: 'LabelDefaultDuration'">
             <select data-bind="options: RunTimeOptions,
                                optionsText: 'title',
@@ -194,7 +194,7 @@
         <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
         <h2 data-bind="i18n: 'TitleCycles'"></h2>
     </header>
-    <div class="tabcontent">
+    <div>
         <p data-bind="i18n: 'TextCycles'"></p>
         <label data-bind="i18n: 'LabelCycles'">
             <slider params="min: 1, max: 5, step: 1, value: Zone.irrigation.cycles"></slider>
@@ -228,7 +228,7 @@
         <button class="left" data-bind="navLink: null, i18n: 'BtnBack'"></button>
         <h2 data-bind="i18n: 'TitleSunriseOffset'"></h2>
     </header>
-    <div class="tabcontent">
+    <div>
         <p data-bind="i18n: 'TextSunriseOffset'"></p>
         <fieldset>
             <!-- ko foreach: SunriseOptions -->

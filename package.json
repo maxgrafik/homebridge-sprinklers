@@ -2,7 +2,7 @@
   "private": true,
   "displayName": "Sprinklers",
   "name": "homebridge-sprinklers",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Smart irrigation for Homebridge",
   "main": "src/index.js",
   "author": "Hendrik Meinl",

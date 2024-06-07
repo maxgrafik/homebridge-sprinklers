@@ -1,12 +1,12 @@
-<dialog role="alert" hidden>
-    <div class="content">
-        <!-- ko if: title -->
-        <h3 data-bind="text: title"></h3>
-        <!-- /ko -->
-        <p data-bind="text: message"></p>
-        <!-- ko foreach: buttons -->
-        <button data-bind="text: text, class: role, click: $component.buttonAction"></button>
-        <!-- /ko -->
-    </div>
+<dialog data-bind="alert: isPresented, class: alertStyle">
+    <!-- ko if: title -->
+    <h2 data-bind="text: title"></h2>
+    <!-- /ko -->
+    <!-- ko if: message -->
+    <p data-bind="text: message"></p>
+    <!-- /ko -->
+    <!-- ko foreach: actions -->
+    <button data-bind="text: label, class: role, click: action"></button>
+    <!-- /ko -->
     <button class="cancel" data-bind="i18n: 'BtnCancel', click: close"></button>
 </dialog>

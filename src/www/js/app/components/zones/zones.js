@@ -12,8 +12,6 @@ define(["knockout"], function(ko) {
 
         const self = this;
 
-        self.NavigationStack = ko.observableArray([]);
-
 
         /* ----- VIEW MODEL ----- */
 
@@ -22,10 +20,9 @@ define(["knockout"], function(ko) {
 
         /* ----- HELPERS ----- */
 
-        self.selectedZone = ko.observable(null);
+        self.selectedZone = ko.observable(null).extend({ notify: "always" });
 
         self.showZone = function(zone) {
-            self.selectedZone(null);
             self.selectedZone(zone);
         };
 

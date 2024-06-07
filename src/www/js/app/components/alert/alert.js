@@ -5,45 +5,45 @@
  * @copyright 2024 Hendrik Meinl
  */
 
-define(["knockout", "utils"], function(ko, ux) {
+/* global i18n */
+define(["knockout", "i18n"], function(ko) {
     "use strict";
 
     function Alert(params) {
 
         const self = this;
 
-        self.config = params.config || ko.observable(null);
+        self.isPresented = params.isPresented || ko.observable(false);
+
+        self.alertStyle = ko.pureComputed(function() {
+            const actions = (ko.unwrap(params.actions) || []);
+            return actions.length > 1 ? "actionSheet" : "alert";
+        }, self);
 
         self.title = ko.pureComputed(function() {
-            return (self.config() && self.config().title) || "";
+            return ko.unwrap(params.title) || "";
         }, self);
 
         self.message = ko.pureComputed(function() {
-            return (self.config() && self.config().message) || "";
+            return ko.unwrap(params.message) || "";
         }, self);
 
-        self.buttons = ko.pureComputed(function() {
-            return (self.config() && self.config().buttons) || [];
-        }, self);
-
-        self.buttonAction = function(button) {
-            button.action && button.action();
-            ux.hideAlert(() => {
-                self.config(null);
+        self.actions = ko.pureComputed(function() {
+            const actions = [];
+            ko.utils.arrayForEach((ko.unwrap(params.actions) || []), function(btn) {
+                const label = btn.label || i18n("BtnOK");
+                const role = btn.role || "default";
+                const action = (btn.action && typeof btn.action === "function")
+                    ? () => { btn.action(); self.isPresented(false); }
+                    : () => { self.isPresented(false); };
+                actions.push({ label: label, role: role, action: action });
             });
-        };
+            return actions;
+        }, self);
 
         self.close = function() {
-            ux.hideAlert(() => {
-                self.config(null);
-            });
+            self.isPresented(false);
         };
-
-        self.config.subscribe((value) => {
-            if (value) {
-                ux.showAlert();
-            }
-        }, self);
     }
 
     return {

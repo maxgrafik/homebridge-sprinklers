@@ -13,12 +13,10 @@ define(["knockout"], function(ko) {
 
         const self = this;
 
-        self.NavigationStack = params.navStack;
-
 
         /* ----- VIEW MODEL ----- */
 
-        self.Zone = params.zone();
+        self.Zone = params.data();
 
 
         /* ----- WRITABLE COMPUTED ----- */
@@ -240,11 +238,6 @@ define(["knockout"], function(ko) {
     Zone.prototype.configureZone = function() {
         const self = this;
         self.Zone.configured(true);
-    };
-
-    Zone.prototype.koDescendantsComplete = function() {
-        const self = this;
-        self.NavigationStack.push("#Settings");
     };
 
     return {

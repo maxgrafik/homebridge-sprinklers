@@ -34,6 +34,7 @@
     --systemGray: #8E8E93;
 
     --navigationbarBackground: #fafafc;
+    /* --navigationbarBackground: #ffffff99; */
 }
 @media (prefers-color-scheme: dark) {
     :root {
@@ -70,6 +71,7 @@
         --systemGray: #8E8E93;
 
         --navigationbarBackground: #1e1e1f;
+        /* --navigationbarBackground: #1C1C1E99; */
     }
 }
 
@@ -78,9 +80,48 @@
 }
 
 
+/* ---  basics --- */
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    height: calc(100% + env(safe-area-inset-top));
+    font-family: -apple-system, sans-serif;
+    font-size: 100%;
+    line-height: 1.3125;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    overscroll-behavior: none;
+}
+
+body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: var(--navigationbarBackground) url("../img/wallpaper.jpg") 50% 50% no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+
 /* ---  views --- */
 
-section.tabs {
+section[role="tablist"] {
     position: relative;
     width: 100%;
     height: 100%;
@@ -89,7 +130,6 @@ section.tabs {
 
 section[role="tabpanel"] {
     position: absolute;
-    display: block;
     top: 0;
     left: 0;
     width: 100%;
@@ -97,7 +137,7 @@ section[role="tabpanel"] {
     background: var(--systemGroupedBackground);
 }
 
-.tabcontent {
+section[role="tabpanel"] > header + div {
     position: absolute;
     top: var(--navbar-height);
     left: 0;
@@ -110,13 +150,13 @@ section[role="tabpanel"] {
 }
 
 @media screen and (min-width: 768px) and (max-width: 834px) {
-    .tabcontent {
+    section[role="tabpanel"] > header + div {
         padding: 32px 20px;
         padding-bottom: calc(32px + env(safe-area-inset-bottom));
     }
 }
 @media screen and (min-width: 835px) {
-    .tabcontent {
+    section[role="tabpanel"] > header + div {
         padding: 32px 50px;
         padding-bottom: calc(32px + env(safe-area-inset-bottom));
     }
@@ -127,13 +167,12 @@ section[role="tabpanel"] {
 
 section[role="tabpanel"] > header {
     position: relative;
-    display: block;
     width: 100%;
     height: var(--navbar-height);
     padding: 0 8px;
-    overflow: hidden;
     background: var(--navigationbarBackground);
     border-bottom: 0.5px solid var(--opaqueSeparator);
+    overflow: hidden;
 }
 section[role="tabpanel"] > header h2 {
     position: absolute;
@@ -152,7 +191,6 @@ section[role="tabpanel"] > header a {
     display: inline-block;
     width: auto;
     height: var(--navbar-height);
-    margin: 0;
     padding: 0 22px;
     font-size: 1.0625rem;
     font-weight: 400;
@@ -200,25 +238,53 @@ section[role="tabpanel"] > header a.right:before {
 /* ---  typography --- */
 
 h1 {
-    position: relative;
-    display: block;
-    height: 52px;
+    display: none;
+}
+
+h2 { /* title1 28/34pt */
     font-size: 1.75rem;
-    font-weight: 600;
+    font-weight: 700;
+    /* letter-spacing: 0.014em; */
     line-height: 2.125rem;
     color: var(--label);
 }
 
-h2 {
+h3 { /* title2 22/28pt */
     font-size: 1.375rem;
-    font-weight: 500;
-    letter-spacing: 0.02rem;
-    line-height: 1;
+    font-weight: 700;
+    /* letter-spacing: -0.012em; */
+    line-height: 1.75rem;
+    color: var(--label);
+}
+
+h4 { /* title3 20/25pt */
+    font-size: 1.25rem;
+    font-weight: 600;
+    /* letter-spacing: -0.023em; */
+    line-height: 1.5625rem;
+    color: var(--label);
+}
+
+h5 { /* headline 17/22pt */
+    font-size: 1rem;
+    font-weight: 600;
+    /* letter-spacing: -0.026em; */
+    line-height: 1.375rem;
+    color: var(--label);
+}
+
+h6 { /* subhead 15/20pt */
+    font-size: 0.9375rem;
+    font-weight: 600;
+    /* letter-spacing: -0.016em; */
+    line-height: 1.25rem;
     color: var(--label);
 }
 
 h2.contentUnavailable {
-    font-weight: 400;
+    font-size: 1.4375rem;
+    font-weight: 600;
+    letter-spacing: -0.004em;
     text-align: center;
     color: var(--tertiaryLabel);
 }
@@ -236,21 +302,43 @@ h2.contentUnavailable:before {
     background: var(--tertiaryLabel);
 }
 
-p {
-    margin: 8px 18px 26px 18px;
-    font-size: 0.875rem;
+section[role="tabpanel"] > header + div > h2:first-child,
+section[role="tabpanel"] > header + div > h3:first-child,
+section[role="tabpanel"] > header + div > h4:first-child,
+section[role="tabpanel"] > header + div > h5:first-child {
+    height: 56px;
+}
+
+p { /* footnote 13/18pt */
+    margin: 8px 16px 26px 16px;
+    font-size: 0.8125rem;
     font-weight: 400;
-    line-height: 1.25;
+    letter-spacing: -0.006em;
+    line-height: 1.125rem;
     color: var(--secondaryLabel);
     white-space: pre-wrap;
 }
 
 small {
-    font-size: 0.875rem;
+    /* callout 16/21pt */
+    font-size: 1rem;
     font-weight: 400;
+    letter-spacing: -0.020em;
+    line-height: 1.3125rem;
+
+    /* subhead 15/20pt */
+    font-size: 0.9375rem;
+    font-weight: 400;
+    letter-spacing: -0.016em;
+    line-height: 1.25rem;
+
     color: var(--secondaryLabel);
 }
 
+a {
+    text-decoration: none;
+    color: var(--ios-blue);
+}
 
 
 /* ---  inputs  --- */
@@ -267,13 +355,12 @@ input {
     user-select: auto;
 }
 
-
 fieldset {
     border: none;
 }
 
 legend, label, input, select, .select, button {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: -apple-system, sans-serif;
 }
 
 legend, label {
@@ -303,6 +390,7 @@ button {
     font-weight: 400;
     line-height: 28px;
     text-transform: none;
+    text-decoration: none;
     text-align: left;
     background-color: var(--secondarySystemGroupedBackground);
     border-radius: 9px;
@@ -513,6 +601,10 @@ input.switch:checked:before {
 input[type="text"][readonly],
 input[type="number"][readonly] {
     color: var(--secondaryLabel);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    cursor: default;
 }
 
 
@@ -580,70 +672,122 @@ button.destructive {
 }
 
 
-/* ---  alert --- */
+/* ---  alert/action sheet --- */
 
-dialog[role="alert"] {
-    display: block;
+dialog {
+    display: none;
     position: fixed;
-    top: 33%;
     left: 0;
     right: 0;
-    width: 270px;
     margin: 0 auto;
-    border: none;
-    background: transparent;
-    outline: 0;
-    z-index: 9999;
-}
-dialog[role="alert"] .content {
-    text-align: center;
     background: var(--secondarySystemBackground);
-    background-clip: padding-box;
+    border: none;
     border-radius: 14px;
-}
-dialog[role="alert"] h3 {
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.25;
-    color: var(--label);
-    margin: 0 0 -2px 0;
-    padding: 20px 14px 0 14px;
-}
-dialog[role="alert"] p {
-    margin: 0;
-    padding: 14px;
-    white-space: pre-wrap;
-    color: var(--secondaryLabel);
-}
-dialog[role="alert"] button {
-    width: 50%;
-    height: 44px;
-    padding: 0 16px;
-    font-size: 1.0625rem;
-    font-weight: 400;
-    line-height: 44px;
+    outline: 0;
+    overflow: visible;
     text-align: center;
+    /* z-index: 9999; */
+}
+dialog[open] {
+    display: block;
+}
+
+dialog.alert {
+    top: 33%;
+    width: 270px;
+}
+
+@media screen and (max-width: 767px) {
+    dialog.actionSheet {
+        top: auto;
+        bottom: 74px;
+        bottom: calc(65px + env(safe-area-inset-bottom));
+        width: calc(100% - 16px);
+        max-width: calc(100% - 16px); /* overwrite safari default */
+    }
+}
+@media screen and (min-width: 768px) {
+    dialog.actionSheet {
+        top: 33%;
+        width: fit-content;
+        min-width: 270px;
+        box-shadow: 0 0 45px rgba(0, 0, 0, 0.2);
+    }
+}
+
+dialog h2 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.375rem;
+    color: var(--label);
+    height: auto;
+    margin: 0;
+    padding: 18px;
+}
+dialog p {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.125rem;
+    color: var(--secondaryLabel);
+    margin: 0;
+    padding: 18px;
+}
+dialog h2 + p {
+    margin: -32px 0 0 0;
+}
+
+dialog button {
+    margin: 0 !important;
+    padding: 0 15px;
+    text-align: center;
+    border: none;
     border-radius: 0;
     background: transparent;
 }
-dialog[role="alert"] .content button {
-    margin: 0 0 0 50%;
-    border-top: 0.5px solid var(--opaqueSeparator);
-}
-dialog[role="alert"] > button {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    border-top: 0.5px solid var(--opaqueSeparator);
-    border-right: 0.5px solid var(--opaqueSeparator);
-}
 
-.modal-backdrop {
-    position: fixed;
-    top: 0;
+dialog.alert button {
+    width: 50%;
+    height: 44px;
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 44px;
+    border-top: 0.5px solid var(--opaqueSeparator);
+}
+dialog.alert button:first-of-type:not(:only-of-type) {
+    position: absolute;
     right: 0;
     bottom: 0;
-    left: 0;
-    background: rgba(0,0,0,.36);
-    z-index: 9990;
+    border-left: 0.5px solid var(--opaqueSeparator);
+}
+dialog.alert button:last-of-type {
+    font-weight: 600;
+}
+dialog.alert button:only-of-type {
+    width: 100%;
+}
+
+dialog.actionSheet button {
+    width: 100%;
+    height: 57px;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 57px;
+    border-top: 0.5px solid var(--opaqueSeparator);
+}
+dialog.actionSheet button:last-of-type {
+    position: absolute;
+    top: calc(100% + 8px);
+    font-weight: 600;
+    background: var(--tertiarySystemBackground);
+    border: none;
+    border-radius: 14px;
+}
+
+dialog::backdrop {
+    background: rgba(0,0,0,.2);
+    animation: fadeIn .3s;
+}
+dialog.hideAlert::backdrop {
+    animation: fadeOut .3s;
 }

@@ -20,8 +20,6 @@
         "TitleLanguage"            : "Language",
         "TitleLicenses"            : "Licenses",
 
-        "TitleConfirmStop"         : "Stop irrigation of “%{name}”?",
-
         "LabelForecast"            : "Forecast",
         "LabelToday"               : "Today",
         "LabelSchedule"            : "Schedule",
@@ -58,6 +56,8 @@
         "BtnCancel"                : "Cancel",
         "BtnStop"                  : "Stop",
         "BtnStopNow"               : "Stop now",
+        "BtnSkipRun"               : "Skip run",
+        "BtnRunNow"                : "Run now",
         "BtnBack"                  : "Back",
         "BtnRuntime"               : [
                                         [null, null, "%n min"]
@@ -132,10 +132,12 @@
         "TextEfficiency"           : "Efficiency of various irrigation systems:\n• Hose Irrigation Systems: 70–80 %\n• Low-medium Pressure Sprinklers: 75 %\n• Microsprinklers/Microjets: 75–85 %\n• Drip Irrigation: 80–90 %",
         "TextDefaultDuration"      : "The duration you select will determine how long sprinklers in this zone run for when adaptive watering is disabled or when manually turned on outside of a schedule.",
         "TextCycles"               : "You can break the total run time into shorter cycles, so the landscape has time to absorb the water. This also helps to prevent run-off.",
-        "TextMinimumDuration"      : "Irrigation runs will only be scheduled, if the calculated cycle times are longer than the duration you select here.",
+        "TextMinimumDuration"      : "Irrigations will only be scheduled, if the calculated duration per cycle is longer than the time selected here.",
         "TextSunriseOffset"        : "Select the time by which you want scheduled runs to be completed.",
 
-        "TextConfirmStop"          : "When stopping this zone, the next run will not be scheduled before tomorrow."
+        "AlertConfirmStop"         : "Stop irrigation?",
+        "AlertConfirmStopMsg"      : "The next irrigation of zone “%{name}” will not be scheduled before tomorrow.",
+        "AlertScheduleOptionsMsg"  : "Override schedule for zone “%{name}”?"
     },
     "formats": {
         "numberDec" : ".",

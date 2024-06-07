@@ -69,7 +69,7 @@ class OpenMeteo {
             await fsPromises.mkdir(path.dirname(filePath), { recursive: true });
             await fsPromises.writeFile(filePath, JSON.stringify(this.Forecast, null, 4), { encoding: "utf8" });
         } catch(error) {
-            this.log.error(error.message || error);
+            this.log.debug(error.message || error);
         }
     }
 

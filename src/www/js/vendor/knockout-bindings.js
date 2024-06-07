@@ -201,73 +201,109 @@ define(["knockout", "utils", "i18n"], function(ko, ux) {
         }
     };
 
-    ko.bindingHandlers.navStack = {
-        init: function(element) {
-            ko.utils.domData.set(element, "viewCount", 0);
-        },
-        update: function(element, valueAccessor) {
-
-            const navStack = ko.unwrap(valueAccessor());
-            const viewCount = ko.utils.domData.get(element, "viewCount");
-
-            if (navStack.length > viewCount) {
-
-                const currentView = element.querySelector("[role='tabpanel']:not([hidden])");
-                if (currentView) {
-                    ux.hide(currentView, "slideOutLeft");
-                }
-
-                const id = navStack[navStack.length - 1];
-                const nextView = element.querySelector(id);
-                if (nextView) {
-                    ux.show(nextView, "slideInRight");
-                    ko.utils.domData.set(element, "viewCount", viewCount + 1);
-                }
-
-            } else if (navStack.length < viewCount) {
-
-                const currentView = element.querySelector("[role='tabpanel']:not([hidden])");
-                if (currentView) {
-                    ux.hide(currentView, "slideOutRight");
-                }
-
-                const id = navStack[navStack.length - 1];
-                const previousView = id ? element.querySelector(id) : element.querySelector("[role='tabpanel']");
-                if (previousView) {
-                    ux.show(previousView, "slideInLeft");
-                    ko.utils.domData.set(element, "viewCount", viewCount - 1);
-                }
-            }
-        }
-    };
-
     ko.bindingHandlers.navLink = {
         init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
             ko.applyBindingsToNode(element, {
                 click: function() {
 
-                    const root = element.closest("[data-bind*='navStack']");
+                    const root = element.closest("[role='tablist']");
                     if (!root) { return; }
 
-                    const attr = root.getAttribute("data-bind");
-                    if (!attr) { return; }
+                    const viewId = ko.unwrap(valueAccessor());
+                    const navStack = ko.utils.domData.get(root, "navStack") || [];
 
-                    const value = attr.match(/navStack:\s*([^,]*)/);
-                    if (!value) { return; }
+                    if (viewId !== null) {
 
-                    const context = ko.dataFor(root);
-                    const navStack = context[value[1]];
-                    if (!ko.isObservable(navStack)) { return; }
+                        const currentView = root.querySelector("[role='tabpanel']:not([hidden])");
+                        if (currentView) {
+                            ux.hide(currentView, "slideOutLeft");
+                        }
 
-                    const target = ko.unwrap(valueAccessor());
-                    if (target !== null) {
-                        navStack.push("#" + target);
+                        navStack.push(viewId);
+
+                        const nextView = document.getElementById(viewId);
+                        if (nextView) {
+                            ux.show(nextView, "slideInRight");
+                        }
+
+                        ko.utils.domData.set(root, "navStack", navStack);
+
                     } else {
+
+                        const currentView = root.querySelector("[role='tabpanel']:not([hidden])");
+                        if (currentView) {
+                            ux.hide(currentView, "slideOutRight");
+                        }
+
                         navStack.pop();
+
+                        const id = navStack[navStack.length - 1];
+                        const previousView = id ? document.getElementById(id) : root.querySelector("[role='tabpanel']:first-of-type");
+                        if (previousView) {
+                            ux.show(previousView, "slideInLeft");
+                        }
+
+                        ko.utils.domData.set(root, "navStack", navStack);
                     }
                 }
             }, bindingContext);
         }
     };
 
+    ko.bindingHandlers.navDestination = {
+        update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+
+            ko.virtualElements.emptyNode(element);
+
+            const params = ko.unwrap(valueAccessor());
+            if (!params) { return; }
+
+            const data = ko.unwrap(params.for);
+            if (!data) { return; }
+
+            const componentName = ko.unwrap(params.destination);
+
+            const pushView = function(parentNode) {
+
+                const node = parentNode.nextElementSibling;
+                if (!node) { return; }
+
+                const root = node.closest("[role='tablist']");
+                if (!root) { return; }
+
+                const navStack = ko.utils.domData.get(root, "navStack") || [];
+
+                const currentView = root.querySelector("[role='tabpanel']:not([hidden])");
+                if (currentView) {
+                    ux.hide(currentView, "slideOutLeft");
+                }
+
+                const nextView = node.closest("[role='tabpanel'][hidden]");
+                if (nextView) {
+                    ux.show(nextView, "slideInRight");
+                    navStack.push(nextView.id);
+                }
+
+                ko.utils.domData.set(root, "navStack", navStack);
+            };
+
+            ko.applyBindingsToNode(element, {
+                component: { name: componentName, params: { data: params.for } },
+                descendantsComplete: pushView
+            }, bindingContext);
+        }
+    };
+
+    ko.virtualElements.allowedBindings.navDestination = true;
+
+    ko.bindingHandlers.alert = {
+        update: function(element, valueAccessor) {
+            const isPresented = ko.unwrap(valueAccessor());
+            if (isPresented === true && !element.hasAttribute("open")) {
+                ux.showAlert(element);
+            } else if (isPresented === false && element.hasAttribute("open")) {
+                ux.hideAlert(element);
+            }
+        }
+    };
 });

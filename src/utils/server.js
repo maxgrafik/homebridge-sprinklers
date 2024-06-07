@@ -49,8 +49,8 @@ class Server {
             case "zones":
                 this.setZones(req, res);
                 break;
-            case "cancel":
-                this.cancelZone(req, res);
+            case "override":
+                this.overrideZoneSchedule(req, res);
                 break;
             default:
                 res.sendStatus(400);
@@ -95,14 +95,26 @@ class Server {
         res.sendStatus(200);
     }
 
-    async cancelZone(req, res) {
-        const zoneId = req.query["zoneId"];
-        if (!zoneId) {
+    async overrideZoneSchedule(req, res) {
+        const obj = req.body;
+        if (typeof obj !== "object" || Array.isArray(obj) || obj === null) {
             return res.sendStatus(400);
         }
-        const zone = this.zones.find(({ id }) => id === parseInt(zoneId));
+        const zone = this.zones.find(({ id }) => id === obj.zoneId);
         if (zone) {
-            await zone.cancel();
+            switch(obj.schedule) {
+            case "CANCEL":
+                await zone.cancel();
+                break;
+            case "SKIP":
+                await zone.skip();
+                break;
+            case "RUN":
+                await zone.run();
+                break;
+            default:
+                return res.sendStatus(400);
+            }
         }
         res.sendStatus(200);
     }

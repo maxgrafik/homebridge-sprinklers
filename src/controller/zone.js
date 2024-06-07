@@ -70,6 +70,13 @@ class Zone {
         // Cancel current jobs
         this._jobs.cancel();
 
+        if (this.isRunning) {
+            if (this._onStop && typeof this._onStop === "function") {
+                await this._onStop();
+            }
+            this.isRunning = false;
+        }
+
         // Get weather
         const forecast = await this._platform.OpenMeteo.getForecast();
 
@@ -97,25 +104,7 @@ class Zone {
 
         // Create jobs
         if (this.schedule.start !== null) {
-
-            let cycles      = this.irrigation.cycles;
-            let jobStart    = this.schedule.start;
-            let jobDuration = Math.round(this.schedule.duration / cycles);
-
-            // Check if cycle duration exceeds HomeKit limit
-            if (jobDuration > 3600) {
-                cycles = Math.ceil(this.schedule.duration / 3600);
-                jobDuration = Math.round(this.schedule.duration / cycles);
-
-                this._platform.log.warn("[%s] Cycle duration exceeds HomeKit limit. Temporarily setting cycle count to %s", this.name, cycles);
-            }
-
-            for (let cycle = 1; cycle <= cycles; cycle++) {
-                this._jobs.add(jobStart, this.start.bind(this, jobDuration));
-                jobStart += (jobDuration * 1000);
-                this._jobs.add(jobStart, this.stop.bind(this, cycles - cycle));
-                jobStart += (this.irrigation.soakTime * 1000);
-            }
+            await this.scheduleJobs();
         }
 
         // Schedule next update
@@ -172,7 +161,7 @@ class Zone {
             const timeStr = Math.round(this.schedule.duration / 60) + " min";
             this._platform.log.debug("[%s] Next scheduled run: %s (%s)", this.name, dateStr, timeStr);
         } else {
-            this._platform.log.debug("[%s] Nothing scheduled. Checking again tomorrow", this.name);
+            this._platform.log.debug("[%s] No scheduled runs. Checking again tomorrow", this.name);
         }
 
         this.saveSettings();
@@ -245,7 +234,7 @@ class Zone {
                     // Check if duration exceeds 24 hours
 
                     if (duration >= (24 * 60 * 60)) {
-                        this._platform.log.debug("[%s] Invalid runtime: %s", this.name, Math.round(duration/60) + " minutes");
+                        this._platform.log.debug("[%s] Error: Runtime exceeds 24 hours", this.name);
                         break;
                     }
 
@@ -306,19 +295,56 @@ class Zone {
         }
     }
 
-    async start(duration) {
+    async scheduleJobs(overrideStart = null) {
+
+        let cycles      = this.irrigation.cycles;
+        let jobStart    = overrideStart || this.schedule.start;
+        let jobDuration = Math.round(this.schedule.duration / cycles);
+
+        // Check if cycle duration exceeds HomeKit limit
+        if (jobDuration > 3600) {
+            cycles = Math.ceil(this.schedule.duration / 3600);
+            jobDuration = Math.round(this.schedule.duration / cycles);
+
+            this._platform.log.warn("[%s] Calculated cycle duration exceeds HomeKit limit", this.name);
+            this._platform.log.warn("[%s] Temporarily setting cycle count to %s", this.name, cycles);
+        }
+
+        for (let cycle = 1; cycle <= cycles; cycle++) {
+            this._jobs.add(jobStart, this.start.bind(this, jobDuration, cycle, cycles));
+            jobStart += (jobDuration * 1000);
+            this._jobs.add(jobStart, this.stop.bind(this, cycles - cycle));
+            jobStart += (this.irrigation.soakTime * 1000);
+        }
+    }
+
+    async start(duration, currentCycle, totalCycles) {
+
         if (this._onStart && typeof this._onStart === "function") {
             await this._onStart(duration);
         }
+
         this.isRunning = true;
+
+        if (currentCycle === 1) {
+            this._platform.log.info("[%s] Starting scheduled run", this.name);
+        }
+
+        const timeStr = Math.round(duration / 60) + " min";
+        this._platform.log.info("[%s] Cycle %s of %s (%s)", this.name, currentCycle, totalCycles, timeStr);
     }
 
     async stop(remainingCycles) {
+
         if (this._onStop && typeof this._onStop === "function") {
             await this._onStop();
         }
+
         if (remainingCycles === 0) {
             this.isRunning = false;
+
+            this._platform.log.info("[%s] Scheduled run completed", this.name);
+
             this.updateSchedule();
         }
     }
@@ -326,13 +352,14 @@ class Zone {
     async cancel() {
         if (this.isRunning) {
 
+            this._jobs.cancel();
+
             if (this._onStop && typeof this._onStop === "function") {
                 await this._onStop();
             }
 
-            const nextUpdate = (this._jobs.jobs.pop() || {}).timestamp || Date.now();
-
-            this._jobs.cancel();
+            // scheduled start + 24h - 30min (pre-irrigation check)
+            const nextUpdate = this.schedule.start + (24 * 60 * 60 * 1000) - (30 * 60 * 1000);
 
             this.isRunning = false;
             this.schedule.start = null;
@@ -343,14 +370,95 @@ class Zone {
             this._jobs.add(nextUpdate, this.updateSchedule.bind(this));
             this._jobs.run();
 
-            const dateStr = new Date(nextUpdate).toLocaleString();
+            this._platform.log.info("[%s] Current run was cancelled", this.name);
 
-            this._platform.log.debug("[%s] Scheduled run was cancelled. Next update: %s", this.name, dateStr);
+            const dateStr = new Date(nextUpdate).toLocaleString();
+            this._platform.log.debug("[%s] Next update: %s", this.name, dateStr);
+        }
+    }
+
+    async skip() {
+        if (this.isRunning || this.schedule.start === null) {
+            return;
+        }
+
+        this._jobs.cancel();
+
+        // scheduled start + 24h - 30min (pre-irrigation check)
+        const nextUpdate = this.schedule.start + (24 * 60 * 60 * 1000) - (30 * 60 * 1000);
+
+        this.isRunning = false;
+        this.schedule.start = null;
+        this.schedule.duration = null;
+
+        this.saveSettings();
+
+        this._jobs.add(nextUpdate, this.updateSchedule.bind(this));
+        this._jobs.run();
+
+        this._platform.log.info("[%s] Skipping scheduled run", this.name);
+
+        const dateStr = new Date(nextUpdate).toLocaleString();
+        this._platform.log.debug("[%s] Next update: %s", this.name, dateStr);
+    }
+
+    async run() {
+        if (this.isRunning || this.schedule.start === null) {
+            return;
+        }
+
+        this._jobs.cancel();
+        await this.scheduleJobs(Date.now());
+        this._jobs.run();
+
+        this._platform.log.info("[%s] Overriding schedule", this.name);
+    }
+
+    async loadSettings() {
+
+        const storagePath = this._platform.api.user.storagePath();
+        const filePath = path.join(storagePath, "sprinklers", "zone" + this.id + ".json");
+
+        try {
+            const contents = await fsPromises.readFile(filePath, { encoding: "utf8" });
+            const settings = JSON.parse(contents);
+            this.updateSettings(this, settings, ["id", "name", "sensor", "isRunning"]);
+        } catch(error) {
+            // this._platform.log.debug(error.message || error);
+        }
+    }
+
+    async saveSettings() {
+
+        const storagePath = this._platform.api.user.storagePath();
+        const filePath = path.join(storagePath, "sprinklers", "zone" + this.id + ".json");
+
+        try {
+            await fsPromises.mkdir(path.dirname(filePath), { recursive: true });
+            await fsPromises.writeFile(filePath, this.serialize(), { encoding: "utf8" });
+        } catch(error) {
+            this._platform.log.debug(error.message || error);
+        }
+    }
+
+    updateSettings(obj, src, ignore = []) {
+        for (const key of Object.keys(obj)) {
+            if (ignore.includes(key)) { continue; }
+            if (typeof obj[key] === "object" && !Array.isArray(obj[key]) && obj[key] !== null) {
+                if (Object.hasOwn(src, key)) {
+                    this.updateSettings(obj[key], src[key]);
+                }
+            } else if (Object.hasOwn(src, key)) {
+                if (Array.isArray(obj[key])) {
+                    obj[key] = src[key].slice();
+                } else {
+                    obj[key] = src[key];
+                }
+            }
         }
     }
 
     updateRootZoneDepletion(forecast) {
-
         if (!this.schedule.adaptive) {
             this.characteristics.Dr = 0;
             return;
@@ -399,50 +507,6 @@ class Zone {
         const appliedWaterPerSquareMeter = appliedWaterTotal / this.irrigation.area;
 
         this.characteristics.I += (Math.round(appliedWaterPerSquareMeter * 100) / 100);
-    }
-
-    async loadSettings() {
-
-        const storagePath = this._platform.api.user.storagePath();
-        const filePath = path.join(storagePath, "sprinklers", "zone" + this.id + ".json");
-
-        try {
-            const contents = await fsPromises.readFile(filePath, { encoding: "utf8" });
-            const settings = JSON.parse(contents);
-            this.updateSettings(this, settings, ["id", "name", "sensor", "isRunning"]);
-        } catch(error) {
-            // this._platform.log.debug(error.message || error);
-        }
-    }
-
-    async saveSettings() {
-
-        const storagePath = this._platform.api.user.storagePath();
-        const filePath = path.join(storagePath, "sprinklers", "zone" + this.id + ".json");
-
-        try {
-            await fsPromises.mkdir(path.dirname(filePath), { recursive: true });
-            await fsPromises.writeFile(filePath, this.serialize(), { encoding: "utf8" });
-        } catch(error) {
-            this._platform.log.debug(error.message || error);
-        }
-    }
-
-    updateSettings(obj, src, ignore = []) {
-        for (const key of Object.keys(obj)) {
-            if (ignore.includes(key)) { continue; }
-            if (typeof obj[key] === "object" && !Array.isArray(obj[key]) && obj[key] !== null) {
-                if (Object.hasOwn(src, key)) {
-                    this.updateSettings(obj[key], src[key]);
-                }
-            } else if (Object.hasOwn(src, key)) {
-                if (Array.isArray(obj[key])) {
-                    obj[key] = src[key].slice();
-                } else {
-                    obj[key] = src[key];
-                }
-            }
-        }
     }
 
     serialize() {

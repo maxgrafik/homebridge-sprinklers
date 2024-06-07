@@ -8,41 +8,23 @@
 define(function() {
     "use strict";
 
-    /* --- animation event --- */
-
-    // eslint-disable-next-line no-extra-boolean-cast
-    const animationEvent = (!!window.WebKitAnimationEvent) ? "webkitAnimationEnd" : "animationend";
-
-
     /* --- css class handling --- */
 
-    function hasClass(el, className) {
-        return el.classList ? el.classList.contains(className) : new RegExp("\\b"+ className+"\\b").test(el.className);
-    }
-
     function addClass(el, className, fn) {
-        if (el.classList) {
-            el.classList.add(className);
-        } else if (!hasClass(el, className)) {
-            el.className += " " + className;
-        }
+        el.classList.add(className);
         if (fn && typeof fn === "function") {
-            el.addEventListener(animationEvent, function callback() {
-                el.removeEventListener(animationEvent, callback);
+            el.addEventListener("animationend", function callback() {
+                el.removeEventListener("animationend", callback);
                 fn.call(this);
             });
         }
     }
 
     function removeClass(el, className, fn) {
-        if (el.classList) {
-            el.classList.remove(className);
-        } else {
-            el.className = el.className.replace(new RegExp("\\b"+ className+"\\b", "g"), "");
-        }
+        el.classList.remove(className);
         if (fn && typeof fn === "function") {
-            el.addEventListener(animationEvent, function callback() {
-                el.removeEventListener(animationEvent, callback);
+            el.addEventListener("animationend", function callback() {
+                el.removeEventListener("animationend", callback);
                 fn.call(this);
             });
         }
@@ -113,41 +95,18 @@ define(function() {
 
     /* --- alert --- */
 
-    function showAlert() {
-        const backdrop = document.createElement("div");
-        addClass(backdrop, "modal-backdrop");
-        addClass(backdrop, "fadeIn");
-        document.body.appendChild(backdrop);
-
-        const el = document.querySelector("dialog[role='alert'][hidden]");
-        if (el) {
-            addClass(el, "slideUp", function() {
-                removeClass(el, "slideUp");
-            });
-            el.removeAttribute("hidden");
-        }
+    function showAlert(el) {
+        addClass(el, "showAlert", () => {
+            removeClass(el, "showAlert");
+        });
+        el.showModal();
     }
 
-    function hideAlert(fn) {
-        const backdrop = document.querySelector(".modal-backdrop");
-        if (backdrop) {
-            removeClass(backdrop, "fadeIn");
-            addClass(backdrop, "fadeOut", function() {
-                document.body.removeChild(backdrop);
-            });
-        }
-
-        const elms = document.querySelectorAll("dialog[role='alert']:not([hidden])");
-        // eslint-disable-next-line no-cond-assign
-        for (let i = 0, el; el = elms[i]; i++) {
-            addClass(el, "slideDown", function() {
-                this.setAttribute("hidden", "");
-                removeClass(this, "slideDown");
-                if (fn && typeof fn === "function") {
-                    fn.call();
-                }
-            });
-        }
+    function hideAlert(el) {
+        addClass(el, "hideAlert", () => {
+            removeClass(el, "hideAlert");
+            el.close();
+        });
     }
 
 
