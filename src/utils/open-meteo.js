@@ -81,7 +81,7 @@ class OpenMeteo {
             const dailyData = [
                 "weather_code",
                 "temperature_2m_max",
-                "temperature_2m_min",
+                // "temperature_2m_min",
                 "sunrise",
                 // "sunset",
                 "precipitation_sum",

@@ -16,9 +16,9 @@
                     <span data-bind="text: $data.day"></span>
                     <i data-bind="css: $data.css, attr: { title: $data.cond }"></i>
                     <figcaption>
-                        <span class="tempMax" data-bind="text: $data.tMax"></span>
-                        <span class="tempMin" data-bind="text: $data.tMin"></span>
-                        <!--<span class="rain" data-bind="text: $data.rain"></span>-->
+                        <span class="temp" data-bind="text: $data.temp"></span>
+                        <span class="rain" data-bind="text: $data.rain, attr: { title: 'Precipitation' }"></span>
+                        <span class="ETo" data-bind="text: $data.ETo, attr: { title: 'Evapotranspiration (ETo)' }"></span>
                     </figcaption>
                 </figure>
                 <!-- /ko -->

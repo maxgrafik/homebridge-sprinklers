@@ -74,7 +74,7 @@ figure {
 figure i.wi {
     height: max(4.5vw, 4.5vh);
     max-height: 56px;
-    margin: 12px 0 12px 0;
+    margin: 9px 0 8px 0;
     color: #fff;
 }
 figure span {
@@ -82,20 +82,37 @@ figure span {
     font-size: 1rem;
     color: #fff;
 }
-figure .tempMin {
-    color: #fff;
+
+figure .rain, figure .ETo {
+    margin: 4px 3px 0 3px;
+    padding: 5px 4px 4px 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
+    border-radius: 4px;
     opacity: .6;
-}
-figure .tempMax {
-    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 figure .rain {
-    padding-top: 6px;
-    color: #6ae8fa;
+    margin-top: 12px;
+    color: #000;
+    background: #fff;
+    mix-blend-mode: lighten;
 }
+figure .ETo {
+    padding: 4px 4px 3px 4px;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
 figure:first-of-type {
     float: none;
     width: 100%;
+    margin: 0 0 1rem 0;
+    padding: 0 0 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,.4);
 }
 figure:first-of-type::after {
     display: table;
@@ -105,46 +122,77 @@ figure:first-of-type::after {
 figure:first-of-type > span {
     font-size: 1.0625rem;
     font-weight: 400;
+    padding: 0 0 5px 0;
 }
 figure:first-of-type i.wi {
     display: block;
     float: left;
-    width: 45%;
-    height: max(10vw, 10vh);
+    width: 33.3%;
+    height: max(9vw, 9vh);
     max-height: 90px;
     margin: 0;
-    padding: 5px 0 0 0;
-}
-figure:first-of-type i.wi::after {
-    content: attr(title);
-    display: block;
-    position: absolute;
-    top: 90px;
-    left: 45%;
-    width: 55%;
-    margin: 0;
-    padding: 0;
-    font-size: 1rem;
-    font-style: normal;
-    line-height: 1;
-    opacity: .8;
 }
 figure:first-of-type figcaption {
     display: block;
     width: 100%;
-    margin: 0 0 1rem 0;
-    padding: 0.5rem 0 2.5rem 45%;
-    border-bottom: 1px solid rgba(255,255,255,.4);
+    height: max(9vw, 9vh);
+    max-height: 90px;
+    padding: 0 0 0 33.3%;
 }
-figure:first-of-type figcaption span {
-    display: inline;
-    padding: 0 0.5rem;
+figure:first-of-type figcaption span:first-of-type {
+    display: block;
+    float: left;
+    width: 55%;
+    height: max(9vw, 9vh);
+    max-height: 90px;
+    margin: 0 7.5% 0 0;
     font-size: 2.5rem;
-    line-height: 3.5rem;
+    line-height: min(90px, max(9vw, 9vh));
 }
-figure:first-of-type figcaption span.rain {
-    display: none;
+
+figure:first-of-type figcaption .rain,
+figure:first-of-type figcaption .ETo {
+    position: relative;
+    display: block;
+    float: none;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 0.8125rem;
+    text-align: right;
 }
+figure:first-of-type figcaption .rain {
+    top: calc(50% - (12px + 0.8125rem));
+}
+figure:first-of-type figcaption .rain::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 0.8125rem;
+    height: 0.8125rem;
+    -webkit-mask-image: url("../img/icon-drop.svg");
+    -webkit-mask-size: 110%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: #000;
+}
+figure:first-of-type figcaption .ETo {
+    top: calc(50% - (8px + 0.8125rem));
+}
+figure:first-of-type figcaption .ETo::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 0.8125rem;
+    height: 0.8125rem;
+    -webkit-mask-image: url("../img/icon-dry.svg");
+    -webkit-mask-size: 110%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: #fff;
+}
+
 
 
 /* ---  login dialog --- */
@@ -199,6 +247,31 @@ figure:first-of-type figcaption span.rain {
 
 
 /* --- miscellaneous stuff --- */
+
+.app-info {
+    margin: 16px 0 48px 0;
+    text-align: center
+}
+.app-info img {
+    margin: 0 0 8px 0;
+}
+.app-info h2 {
+    height: 60px;
+    font-size: 0;
+    line-height: 0;
+}
+.app-info h2::after {
+    content: "";
+    display: block;
+    width: 224px;
+    height: 60px;
+    margin: 0 auto;
+    -webkit-mask-image: url("../img/sprinklers.svg");
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    background: var(--accent-color);
+}
 
 .spinner {
     width: 64px;

@@ -1,3 +1,14 @@
+:root {
+    --label: #000000;
+    --separator: #3C3C434A;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --label: #FFFFFF;
+        --separator: #54545899;
+    }
+}
+
 *,
 *:before,
 *:after {

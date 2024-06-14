@@ -26,8 +26,8 @@ define(["knockout", "knockout-mapping", "ajax"], function(ko, koMapping, ajax) {
                 time               : ko.observableArray([]),
                 weather_code       : ko.observableArray([]),
                 temperature_2m_max : ko.observableArray([]),
-                temperature_2m_min : ko.observableArray([]),
-                // precipitation_probability_max : ko.observableArray([]),
+                precipitation_sum  : ko.observableArray([]),
+                et0_fao_evapotranspiration : ko.observableArray([]),
             },
         };
 
@@ -42,15 +42,14 @@ define(["knockout", "knockout-mapping", "ajax"], function(ko, koMapping, ajax) {
             ko.utils.arrayForEach(self.Forecast.daily.time(), function(time, index) {
                 if (index === 0) { return; }
                 const weekday = new Date(Date.parse(time)).toLocaleDateString(ko.language(), options);
-                // const rain = self.Forecast.daily.precipitation_probability_max()[index];
                 const wmoCode = self.Forecast.daily.weather_code()[index];
                 days.push({
-                    day: index === 1 ? i18n("LabelToday") : weekday,
-                    css: "wi wi-wmo-" + wmoCode,
-                    tMin: Math.round(self.Forecast.daily.temperature_2m_min()[index]) + "°",
-                    tMax: Math.round(self.Forecast.daily.temperature_2m_max()[index]) + "°",
-                    // rain: rain !== 0 ? rain + "%" : "",
-                    cond: i18n("OptWeatherCondition", wmoCode),
+                    day  : index === 1 ? i18n("LabelToday") : weekday,
+                    css  : "wi wi-wmo-" + wmoCode,
+                    temp : Math.round(self.Forecast.daily.temperature_2m_max()[index]) + "°",
+                    rain : Math.round(self.Forecast.daily.precipitation_sum()[index]) + " mm",
+                    ETo  : Math.round(self.Forecast.daily.et0_fao_evapotranspiration()[index]) + " mm",
+                    cond : i18n("OptWeatherCondition", wmoCode),
                 });
             });
             return days;
