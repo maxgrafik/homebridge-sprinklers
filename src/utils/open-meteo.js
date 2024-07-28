@@ -19,6 +19,7 @@ class OpenMeteo {
         this.config = config;
         this.api = api;
 
+        this.weatherModel = this.config.weatherModel || "best_match";
         this.longitude = this.config.longitude;
         this.latitude = this.config.latitude;
 
@@ -94,7 +95,8 @@ class OpenMeteo {
                 + "&longitude=" + this.longitude
                 + "&daily=" + dailyData.join(",")
                 + "&timezone=auto"
-                + "&past_days=1";
+                + "&past_days=1"
+                + "&models=" + this.weatherModel;
 
             const request = https.request(url, (response) => {
 

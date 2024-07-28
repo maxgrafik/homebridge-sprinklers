@@ -306,8 +306,8 @@ class Zone {
             cycles = Math.ceil(this.schedule.duration / 3600);
             jobDuration = Math.round(this.schedule.duration / cycles);
 
-            this._platform.log.warn("[%s] Calculated cycle duration exceeds HomeKit limit", this.name);
-            this._platform.log.warn("[%s] Temporarily setting cycle count to %s", this.name, cycles);
+            this._platform.log.debug("[%s] Calculated cycle duration exceeds HomeKit limit", this.name);
+            this._platform.log.debug("[%s] Temporarily setting cycle count to %s", this.name, cycles);
         }
 
         for (let cycle = 1; cycle <= cycles; cycle++) {

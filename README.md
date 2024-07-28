@@ -43,6 +43,7 @@ I recommend using Homebridge UI to configure the plugin
             },
             ...
         ],
+        "weatherModel": "best_match",
         "latitude": <-90...90>,
         "longitude": <-180...180>,
         "server": <true|false>,
@@ -57,6 +58,7 @@ Option | Description
 **zones** | Array of zones
 **zoneName** | Name of the zone
 **exposeSensor** | Expose contact sensor for this zone<sup>1</sup>
+**weatherModel** | Weather model for weather forecast<sup>2</sup>
 **latitude** | Location coordinates for weather forecast<sup>2</sup>
 **longitude** | Location coordinates for weather forecast<sup>2</sup>
 **server** | Run web app server
