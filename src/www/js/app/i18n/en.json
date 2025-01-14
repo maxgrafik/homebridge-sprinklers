@@ -120,6 +120,7 @@
                                      ],
         "TextNoScheduledRun"       : "No scheduled run",
         "TextIsRunning"            : "Running…",
+        "TextZoneDisabled"         : "Not enabled",
         "TextCharacteristics"      : "You can adjust the characteristics of adaptive zones to get a better estimation of the water requirements for your plants.",
         "TextCropCoefficient"      : "Based on crop type or species and their water needs.",
         "TextRootingDepth"         : "Depth in meters down to which roots can take up the maximum amount of available water from the soil.",

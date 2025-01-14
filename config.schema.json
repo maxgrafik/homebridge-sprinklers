@@ -94,7 +94,7 @@
             "serverPort": {
                 "title": "Server port",
                 "type": "number",
-                "default": 9000
+                "default": 8080
             },
             "serverPassword": {
                 "title": "Password",

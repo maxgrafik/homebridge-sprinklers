@@ -33,6 +33,7 @@
             <!-- ko foreach: { data: configuredZones, as: 'zone', noChildContext: true } -->
             <div class="card">
                 <h4 data-bind="text: zone.name"></h4>
+                <!-- ko if: zone.enabled -->
                 <!-- ko ifnot: zone.isRunning -->
                 <small data-bind="text: NextRun(zone)"></small>
                 <!-- ko if: zone.schedule.duration -->
@@ -42,6 +43,10 @@
                 <!-- ko if: zone.isRunning -->
                 <small data-bind="i18n: 'TextIsRunning'"></small>
                 <button data-bind="i18n: 'BtnStop', click: $parent.confirmStop.bind(null, zone)"></button>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko ifnot: zone.enabled -->
+                <small data-bind="i18n: 'TextZoneDisabled'"></small>
                 <!-- /ko -->
             </div>
             <!-- /ko -->

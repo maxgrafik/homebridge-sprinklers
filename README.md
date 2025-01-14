@@ -47,7 +47,7 @@ I recommend using Homebridge UI to configure the plugin
         "latitude": <-90...90>,
         "longitude": <-180...180>,
         "server": <true|false>,
-        "serverPort": 9000,
+        "serverPort": 8080,
         "serverPassword": <password>
     }
 ]

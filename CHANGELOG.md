@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.4.1  (2025-01-14)
+
+- Minor bugfix and UI enhancements
+
 ## v0.4.0  (2024-07-28)
 
 - Added option to select Open-Meteo weather model in plugin config

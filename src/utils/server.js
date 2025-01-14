@@ -57,7 +57,7 @@ class Server {
             }
         });
 
-        const port = this.config.serverPort || 9000;
+        const port = this.config.serverPort || 8080;
         this.app.listen(port, () => {
             this.log.debug("[Web UI] Server running on port " + port);
         });
@@ -89,6 +89,7 @@ class Server {
             if (zone) {
                 const ignore = ["id", "name", "sensor", "start", "duration", "isRunning"];
                 zone.updateSettings(zone, obj, ignore);
+                await zone.saveSettings();
                 await zone.updateSchedule();
             }
         }

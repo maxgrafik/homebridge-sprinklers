@@ -120,6 +120,7 @@
                                      ],
         "TextNoScheduledRun"       : "Keine geplante Beregnung",
         "TextIsRunning"            : "Läuft…",
+        "TextZoneDisabled"         : "Nicht aktiv",
         "TextCharacteristics"      : "Die gewählten Pflanzen- und Bodeneigenschaften beeinflussen die Beregnungsdauer.",
         "TextCropCoefficient"      : "Basierend auf Pflanzenart und Wachstumsphase.",
         "TextRootingDepth"         : "Tiefe in Metern, bis zu der das Bodenwasser von den Pflanzenwurzeln voll ausgeschöpft werden kann.",

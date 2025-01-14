@@ -10,7 +10,6 @@
             <input type="checkbox" class="switch" data-bind="checked: Zone.enabled">
         </label>
 
-        <!-- ko if: Zone.enabled -->
         <fieldset>
             <legend data-bind="i18n: 'LabelZoneSchedule'"></legend>
             <label data-bind="i18n: 'LabelAdaptive'">
@@ -34,7 +33,7 @@
             </a>
         </fieldset>
 
-        <!-- ko if: Zone.configured -->
+        <!-- ko if: Zone.enabled() && Zone.configured() -->
         <fieldset>
             <legend data-bind="i18n: 'LabelActivity'"></legend>
             <label data-bind="i18n: 'LabelNextRun'">
@@ -46,8 +45,6 @@
             </label>
             <!-- /ko -->
         </fieldset>
-        <!-- /ko -->
-
         <!-- /ko -->
 
         <!-- ko ifnot: Zone.configured -->
