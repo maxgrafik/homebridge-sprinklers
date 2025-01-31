@@ -2,7 +2,7 @@
   "private": true,
   "displayName": "Sprinklers",
   "name": "homebridge-sprinklers",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Smart irrigation for Homebridge",
   "main": "src/index.js",
   "author": "Hendrik Meinl",
@@ -20,7 +20,12 @@
   },
   "keywords": [
     "homebridge-plugin",
-    "irrigation"
+    "irrigation",
+    "sprinkler",
+    "garden",
+    "watering",
+    "evapotranspiration",
+    "ETo"
   ],
   "dependencies": {
     "express": "^4.19.2"

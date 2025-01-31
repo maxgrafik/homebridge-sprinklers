@@ -1,13 +1,17 @@
-<span align="center">
+<p align="center">
+    <img src="./branding/app-icon.png">
+    <br><img src="./branding/sprinklers.svg" height="60px" alt="Sprinklers">
+</p>
 
-<img src="./branding/app-icon.png" vspace="12px"><br>
-<img src="./branding/sprinklers.svg" height="60px" alt="Sprinklers">
+<span align="center">
 
 # Smart irrigation for Homebridge
 
-[![GitHub package.json version](https://img.shields.io/github/package-json/v/maxgrafik/homebridge-sprinklers)](https://github.com/maxgrafik/homebridge-sprinklers)
+![Version](https://img.shields.io/github/package-json/v/maxgrafik/homebridge-sprinklers)
+![Homebridge support](https://img.shields.io/badge/Homebridge-1.8.0_%7C_2.0.0--beta-blue)
 
 </span>
+
 
 ## Description
 
@@ -29,13 +33,14 @@ The plugin itself **does not** control any physical hardware. It’s up to you t
 
 ## Configuration
 
-I recommend using Homebridge UI to configure the plugin
+I recommend using [Homebridge UI](https://github.com/homebridge/homebridge-config-ui-x) to configure the plugin
 
 ```
 "platforms": [
     ...
     {
-        "platform": "Sprinklers"
+        "platform": "Sprinklers",
+        "name": "Sprinklers",
         "zones": [
             {
                 "zoneName": <zone_name>,
@@ -43,11 +48,11 @@ I recommend using Homebridge UI to configure the plugin
             },
             ...
         ],
-        "weatherModel": "best_match",
         "latitude": <-90...90>,
         "longitude": <-180...180>,
+        "weatherModel": "best_match",
         "server": <true|false>,
-        "serverPort": 8080,
+        "serverPort": <port>,
         "serverPassword": <password>
     }
 ]
@@ -58,11 +63,11 @@ Option | Description
 **zones** | Array of zones
 **zoneName** | Name of the zone
 **exposeSensor** | Expose contact sensor for this zone<sup>1</sup>
-**weatherModel** | Weather model for weather forecast<sup>2</sup>
 **latitude** | Location coordinates for weather forecast<sup>2</sup>
 **longitude** | Location coordinates for weather forecast<sup>2</sup>
+**weatherModel** | Weather model for weather forecast<sup>2</sup>
 **server** | Run web app server
-**serverPort** | Server port
+**serverPort** | Server port (default: 8080)
 **serverPassword** | Set the password required to log into the web app. Leaving this blank disables password protection.
 
 <sup>1</sup> Apple’s Home app does not allow you to create automations based on the state of an irrigation system or its valves. Exposing a sensor for a zone lets you bind automations to the open/close state of the sensor.

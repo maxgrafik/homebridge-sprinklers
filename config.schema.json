@@ -2,34 +2,54 @@
     "pluginAlias": "Sprinklers",
     "pluginType": "platform",
     "singular": true,
-    "headerDisplay": "Smart irrigation for Homebridge",
+    "headerDisplay": "Sprinklers for Homebridge Setup",
+    "footerDisplay": "Weather data by [Open-Meteo.com](https://open-meteo.com/)",
     "schema": {
         "type": "object",
         "properties": {
+            "name": {
+                "type": "string",
+                "title": "Sprinklers",
+                "default": "Sprinklers"
+            },
             "zones": {
                 "type": "array",
                 "items": {
                     "type": "object",
                     "properties": {
                         "zoneName": {
-                            "title": "Name",
                             "type": "string",
+                            "title": "Name",
+                            "placeholder": "Zone name",
                             "maxLength": 16,
-                            "placeholder": "zone name",
                             "required": true
                         },
                         "exposeSensor": {
-                            "title": "Expose Sensor",
                             "type": "boolean",
+                            "title": "Add sensor",
                             "default": false
                         }
                     }
                 }
             },
+            "latitude": {
+                "type": "number",
+                "title": "Latitude",
+                "minimum": -90,
+                "maximum": 90,
+                "required": true
+            },
+            "longitude": {
+                "type": "number",
+                "title": "Longitude",
+                "minimum": -180,
+                "maximum": 180,
+                "required": true
+            },
             "weatherModel": {
-                "title": "Weather Model",
-                "description": "»Best Match« provides the best forecast for any given location worldwide. »Seamless« combines all models from a given provider into a seamless prediction.",
                 "type": "string",
+                "title": "Weather model",
+                "description": "Open-Meteo uses weather models from multiple national weather providers. »Best Match« provides the best forecast for any given location worldwide. »Seamless« combines all models from a given provider into a seamless prediction.",
                 "default": "best_match",
                 "oneOf": [
                     { "title": "Best Match", "enum": ["best_match"] },
@@ -72,54 +92,56 @@
                 ],
                 "required": true
             },
-            "latitude": {
-                "title": "Latitude",
-                "type": "number",
-                "minimum": -90,
-                "maximum": 90,
-                "default": 0.0
-            },
-            "longitude": {
-                "title": "Longitude",
-                "type": "number",
-                "minimum": -180,
-                "maximum": 180,
-                "default": 0.0
-            },
             "server": {
-                "title": "Enable Server",
                 "type": "boolean",
+                "title": "Enable web app",
+                "description": "To open the web app go to http://&lt;homebridge-ip&gt;:&lt;port&gt;",
                 "default": true
             },
             "serverPort": {
-                "title": "Server port",
                 "type": "number",
+                "title": "Server port",
+                "placeholder": 8080,
                 "default": 8080
             },
             "serverPassword": {
+                "type": "string",
                 "title": "Password",
-                "type": "string"
+                "description": "Set a password to restrict access to the web app"
             }
         }
     },
 
-    "layout": [
+    "form": [
         {
+            "type": "fieldset",
+            "title": "Irrigation zones",
+            "expandable": false,
             "key": "zones",
-            "title": "Zones",
             "buttonText": "Add zone",
             "orderable": false,
             "items": [
                 {
                     "type": "flex",
-                    "flex-flow": "row nowrap",
+                    "flex-flow": "row wrap",
                     "align-items": "baseline",
                     "justify-content": "space-between",
                     "items": [
                         {
                             "flex": "0 1 60%",
-                            "key" : "zones[].zoneName",
-                            "notitle": true
+                            "items": [
+                                {
+                                    "key" : "zones[].zoneName",
+                                    "notitle": true
+                                },
+                                {
+                                    "type": "help",
+                                    "helpvalue": "<p class='text-danger help-block small'>This zone name might not work with HomeKit! Please use only letters and numbers. Spaces are allowed in between.</p>",
+                                    "condition": {
+                                        "functionBody": "return (!model.zones[arrayIndices].zoneName || model.zones[arrayIndices].zoneName.length < 2) ? false : !(/^[\\p{L}\\p{N}][\\p{L}\\p{N} ']*[\\p{L}\\p{N}]$/u.test(model.zones[arrayIndices].zoneName));"
+                                    }
+                                }
+                            ]
                         },
                         {
                             "flex": "0 1 30%",
@@ -131,28 +153,30 @@
             ]
         },
         {
-            "type": "section",
-            "title": "Open-Meteo.com",
+            "type": "fieldset",
+            "title": "Weather forecast",
+            "description": "Set your location and choose a weather model",
             "expandable": true,
             "expanded": false,
             "items": [
-                "weatherModel",
                 {
                     "type": "flex",
-                    "flex-flow": "row nowrap",
+                    "flex-flow": "row wrap",
                     "items": ["latitude", "longitude"]
-                }
+                },
+                "weatherModel"
             ]
         },
         {
-            "type": "section",
-            "title": "Server",
+            "type": "fieldset",
+            "title": "App",
+            "description": "Use the web app to configure your irrigation zones",
             "expandable": true,
             "expanded": false,
             "items": [
                 {
                     "type": "flex",
-                    "flex-flow": "row nowrap",
+                    "flex-flow": "row wrap",
                     "align-items": "baseline",
                     "justify-content": "space-between",
                     "items": [

@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.4.2  (2025-01-31)
+
+- Tested Homebridge 2.0.0 compatibility
+- UI enhancements
+
 ## v0.4.1  (2025-01-14)
 
 - Minor bugfix and UI enhancements

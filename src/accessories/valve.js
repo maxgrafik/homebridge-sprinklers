@@ -43,6 +43,17 @@ class Valve {
             .setCharacteristic(this.Characteristic.Name, zone.name)
             .setCharacteristic(this.Characteristic.ValveType, 1); // irrigation
 
+        // Adding optional ConfiguredName because of:
+        // https://github.com/homebridge/homebridge/issues/3210
+
+        // Only add, if it doesn't exist yet!
+        if (!this.valveService.testCharacteristic(this.Characteristic.ConfiguredName)) {
+            this.valveService.addOptionalCharacteristic(this.Characteristic.ConfiguredName);
+        }
+
+        this.valveService.getCharacteristic(this.Characteristic.ConfiguredName)
+            .updateValue(zone.name);
+
         this.valveService.getCharacteristic(this.Characteristic.Active)
             .onGet(this.getActive.bind(this))
             .onSet(this.setActive.bind(this));
