@@ -19,7 +19,7 @@
                     "properties": {
                         "zoneName": {
                             "type": "string",
-                            "title": "Name",
+                            "title": "Zone name",
                             "placeholder": "Zone name",
                             "maxLength": 16,
                             "required": true
@@ -95,12 +95,12 @@
             "server": {
                 "type": "boolean",
                 "title": "Enable web app",
-                "description": "To open the web app go to http://&lt;homebridge-ip&gt;:&lt;port&gt;",
                 "default": true
             },
             "serverPort": {
                 "type": "number",
                 "title": "Server port",
+                "description": "To open the web app go to http://&lt;homebridge-ip&gt;:&lt;port&gt;",
                 "placeholder": 8080,
                 "default": 8080
             },
@@ -116,37 +116,43 @@
         {
             "type": "fieldset",
             "title": "Irrigation zones",
-            "expandable": false,
-            "key": "zones",
-            "buttonText": "Add zone",
-            "orderable": false,
+            "description": "Add or remove individual irrigation zones",
+            "expandable": true,
+            "expanded": true,
             "items": [
                 {
-                    "type": "flex",
-                    "flex-flow": "row wrap",
-                    "align-items": "baseline",
-                    "justify-content": "space-between",
+                    "type": "array",
+                    "key": "zones",
+                    "notitle": true,
+                    "buttonText": "Add zone",
+                    "orderable": false,
                     "items": [
                         {
-                            "flex": "0 1 60%",
+                            "type": "flex",
+                            "flex-flow": "row wrap",
                             "items": [
                                 {
-                                    "key" : "zones[].zoneName",
-                                    "notitle": true
+                                    "items": [
+                                        {
+                                            "notitle": true,
+                                            "htmlClass": "col-11",
+                                            "labelHtmlClass": "visually-hidden",
+                                            "key": "zones[].zoneName"
+                                        },
+                                        {
+                                            "type": "help",
+                                            "helpvalue": "<p class='text-danger help-block small'>This zone name might not work with HomeKit! Please use only letters and numbers. Spaces are allowed in between.</p>",
+                                            "condition": {
+                                                "functionBody": "return (!model.zones[arrayIndices].zoneName || model.zones[arrayIndices].zoneName.length < 2) ? false : !(/^[\\p{L}\\p{N}][\\p{L}\\p{N}\\u2019 '.,-]*[\\p{L}\\p{N}\\u2019]$/u.test(model.zones[arrayIndices].zoneName));"
+                                            }
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "help",
-                                    "helpvalue": "<p class='text-danger help-block small'>This zone name might not work with HomeKit! Please use only letters and numbers. Spaces are allowed in between.</p>",
-                                    "condition": {
-                                        "functionBody": "return (!model.zones[arrayIndices].zoneName || model.zones[arrayIndices].zoneName.length < 2) ? false : !(/^[\\p{L}\\p{N}][\\p{L}\\p{N} ']*[\\p{L}\\p{N}]$/u.test(model.zones[arrayIndices].zoneName));"
-                                    }
+                                    "htmlClass": "pt-1",
+                                    "key": "zones[].exposeSensor"
                                 }
                             ]
-                        },
-                        {
-                            "flex": "0 1 30%",
-                            "key": "zones[].exposeSensor",
-                            "inline": true
                         }
                     ]
                 }
@@ -175,29 +181,14 @@
             "expanded": false,
             "items": [
                 {
+                    "htmlClass": "pt-3",
+                    "key": "server"
+                },
+                {
                     "type": "flex",
                     "flex-flow": "row wrap",
-                    "align-items": "baseline",
-                    "justify-content": "space-between",
-                    "items": [
-                        {
-                            "flex": "0 1 63%",
-                            "key" : "server",
-                            "inline": true
-                        },
-                        {
-                            "flex": "0 1 7%",
-                            "type": "help",
-                            "helpvalue": "Port:"
-                        },
-                        {
-                            "flex": "0 1 20%",
-                            "key": "serverPort",
-                            "notitle": true
-                        }
-                    ]
-                },
-                "serverPassword"
+                    "items": ["serverPort", "serverPassword"]
+                }
             ]
         }
     ]
