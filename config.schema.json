@@ -134,9 +134,7 @@
                                 {
                                     "items": [
                                         {
-                                            "notitle": true,
                                             "htmlClass": "col-11",
-                                            "labelHtmlClass": "visually-hidden",
                                             "key": "zones[].zoneName"
                                         },
                                         {
@@ -149,7 +147,7 @@
                                     ]
                                 },
                                 {
-                                    "htmlClass": "pt-1",
+                                    "htmlClass": "pt-2",
                                     "key": "zones[].exposeSensor"
                                 }
                             ]

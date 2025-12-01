@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.4.3  (2025-12-01)
+
+- Fixed some glitches in config.schema.json
+
 ## v0.4.2  (2025-01-31)
 
 - Tested Homebridge 2.0.0 compatibility
