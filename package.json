@@ -2,7 +2,7 @@
   "private": true,
   "displayName": "Sprinklers",
   "name": "homebridge-sprinklers",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "description": "Smart irrigation for Homebridge",
   "main": "src/index.js",
   "author": "Hendrik Meinl",
@@ -15,7 +15,7 @@
     "url": "https://github.com/maxgrafik/homebridge-sprinklers/issues"
   },
   "engines": {
-    "node": "^18.20.4 || ^20.18.0 || ^22.10.0",
+    "node": "^20.18.0 || ^22.10.0 || ^24.0.0",
     "homebridge": "^1.8.0 || ^2.0.0-beta.0"
   },
   "keywords": [

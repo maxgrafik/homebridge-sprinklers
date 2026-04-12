@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.5.0  (2026-04-12)
+
+- Update supported Node.js versions
+
 ## v0.4.3  (2025-12-01)
 
 - Fixed some glitches in config.schema.json
